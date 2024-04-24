@@ -39,11 +39,11 @@ import org.springframework.util.Assert;
  */
 public class AzureAiSearchFilterExpressionConverter extends AbstractFilterExpressionConverter {
 
-	private static Pattern DATE_FORMAT_PATTERN = Pattern.compile("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z");
+	private static final Pattern DATE_FORMAT_PATTERN = Pattern.compile("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z");
 
 	private final SimpleDateFormat dateFormat;
 
-	private List<String> allowedIdentifierNames;
+	private final List<String> allowedIdentifierNames;
 
 	public AzureAiSearchFilterExpressionConverter(List<MetadataField> filterMetadataFields) {
 		Assert.notNull(filterMetadataFields, "The filterMetadataFields can not null.");
@@ -108,7 +108,7 @@ public class AzureAiSearchFilterExpressionConverter extends AbstractFilterExpres
 	@Override
 	public void doKey(Key key, StringBuilder context) {
 		var hasOuterQuotes = hasOuterQuotes(key.key());
-		var identifier = (hasOuterQuotes) ? removeOuterQuotes(key.key()) : key.key();
+		var identifier = hasOuterQuotes ? removeOuterQuotes(key.key()) : key.key();
 		var prefixedIdentifier = withMetaPrefix(identifier);
 		if (hasOuterQuotes) {
 			prefixedIdentifier = "'" + prefixedIdentifier.trim() + "'";

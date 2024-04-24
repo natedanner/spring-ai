@@ -99,7 +99,7 @@ public class MilvusVectorStore implements VectorStore, InitializingBean {
 	/**
 	 * Configuration for the Milvus vector store.
 	 */
-	public static class MilvusVectorStoreConfig {
+	public static final class MilvusVectorStoreConfig {
 
 		private final String databaseName;
 
@@ -139,7 +139,7 @@ public class MilvusVectorStore implements VectorStore, InitializingBean {
 			this.indexParameters = builder.indexParameters;
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String databaseName = DEFAULT_DATABASE_NAME;
 
@@ -323,7 +323,7 @@ public class MilvusVectorStore implements VectorStore, InitializingBean {
 	@Override
 	public List<Document> similaritySearch(SearchRequest request) {
 
-		String nativeFilterExpressions = (request.getFilterExpression() != null)
+		String nativeFilterExpressions = request.getFilterExpression() != null
 				? this.filterExpressionConverter.convertExpression(request.getFilterExpression()) : "";
 
 		Assert.notNull(request.getQuery(), "Query string must not be null");
@@ -367,7 +367,7 @@ public class MilvusVectorStore implements VectorStore, InitializingBean {
 
 	private float getResultSimilarity(RowRecord rowRecord) {
 		Float distance = (Float) rowRecord.get(DISTANCE_FIELD_NAME);
-		return (this.config.metricType == MetricType.IP || this.config.metricType == MetricType.COSINE) ? distance
+		return this.config.metricType == MetricType.IP || this.config.metricType == MetricType.COSINE ? distance
 				: (1 - distance);
 	}
 

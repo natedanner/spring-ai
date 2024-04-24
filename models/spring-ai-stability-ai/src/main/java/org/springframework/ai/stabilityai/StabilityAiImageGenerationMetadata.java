@@ -25,9 +25,9 @@ import java.util.Objects;
  */
 public class StabilityAiImageGenerationMetadata implements ImageGenerationMetadata {
 
-	private String finishReason;
+	private final String finishReason;
 
-	private Long seed;
+	private final Long seed;
 
 	public StabilityAiImageGenerationMetadata(String finishReason, Long seed) {
 		this.finishReason = finishReason;
@@ -50,10 +50,12 @@ public class StabilityAiImageGenerationMetadata implements ImageGenerationMetada
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof StabilityAiImageGenerationMetadata that))
+		}
+		if (!(o instanceof StabilityAiImageGenerationMetadata that)) {
 			return false;
+		}
 		return Objects.equals(this.finishReason, that.finishReason) && Objects.equals(this.seed, that.seed);
 	}
 

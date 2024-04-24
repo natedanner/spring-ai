@@ -34,7 +34,7 @@ public class BedrockCohereChatProperties {
 	/**
 	 * Enable Bedrock Cohere Chat Client. False by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * Bedrock Cohere Chat generative name. Defaults to 'cohere-command-v14'.

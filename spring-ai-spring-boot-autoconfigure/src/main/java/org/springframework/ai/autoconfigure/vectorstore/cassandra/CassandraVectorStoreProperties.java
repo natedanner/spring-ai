@@ -39,7 +39,7 @@ public class CassandraVectorStoreProperties {
 
 	private String embeddingColumnName = CassandraVectorStoreConfig.DEFAULT_EMBEDDING_COLUMN_NAME;
 
-	private boolean disallowSchemaChanges = false;
+	private boolean disallowSchemaChanges;
 
 	private int fixedThreadPoolExecutorSize = CassandraVectorStoreConfig.DEFAULT_ADD_CONCURRENCY;
 

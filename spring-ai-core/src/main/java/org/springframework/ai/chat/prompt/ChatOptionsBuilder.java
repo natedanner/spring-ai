@@ -15,7 +15,7 @@
  */
 package org.springframework.ai.chat.prompt;
 
-public class ChatOptionsBuilder {
+public final class ChatOptionsBuilder {
 
 	private class ChatOptionsImpl implements ChatOptions {
 

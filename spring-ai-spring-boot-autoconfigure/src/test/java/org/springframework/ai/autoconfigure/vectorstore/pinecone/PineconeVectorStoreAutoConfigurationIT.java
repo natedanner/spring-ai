@@ -101,7 +101,7 @@ public class PineconeVectorStoreAutoConfigurationIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("spring", "distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			Awaitility.await().until(() -> {
 				return vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(1));

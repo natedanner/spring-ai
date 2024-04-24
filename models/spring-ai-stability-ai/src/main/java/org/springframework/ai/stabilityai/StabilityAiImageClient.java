@@ -94,7 +94,7 @@ public class StabilityAiImageClient implements ImageClient {
 	private static StabilityAiApi.GenerateImageRequest getGenerateImageRequest(ImagePrompt stabilityAiImagePrompt,
 			StabilityAiImageOptions optionsToUse) {
 		StabilityAiApi.GenerateImageRequest.Builder builder = new StabilityAiApi.GenerateImageRequest.Builder();
-		StabilityAiApi.GenerateImageRequest generateImageRequest = builder
+		return builder
 			.withTextPrompts(stabilityAiImagePrompt.getInstructions()
 				.stream()
 				.map(message -> new StabilityAiApi.GenerateImageRequest.TextPrompts(message.getText(),
@@ -110,14 +110,11 @@ public class StabilityAiImageClient implements ImageClient {
 			.withSteps(optionsToUse.getSteps())
 			.withStylePreset(optionsToUse.getStylePreset())
 			.build();
-		return generateImageRequest;
 	}
 
 	private ImageResponse convertResponse(StabilityAiApi.GenerateImageResponse generateImageResponse) {
-		List<ImageGeneration> imageGenerationList = generateImageResponse.artifacts().stream().map(entry -> {
-			return new ImageGeneration(new Image(null, entry.base64()),
-					new StabilityAiImageGenerationMetadata(entry.finishReason(), entry.seed()));
-		}).toList();
+		List<ImageGeneration> imageGenerationList = generateImageResponse.artifacts().stream().map(entry -> new ImageGeneration(new Image(null, entry.base64()),
+					new StabilityAiImageGenerationMetadata(entry.finishReason(), entry.seed()))).toList();
 
 		return new ImageResponse(imageGenerationList, ImageResponseMetadata.NULL);
 	}

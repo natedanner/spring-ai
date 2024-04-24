@@ -77,7 +77,7 @@ public class JsonUtils {
 	 * @return the list of doubles
 	 */
 	public static List<Double> toDouble(List<Float> floats) {
-		return floats.stream().map(f -> f.doubleValue()).toList();
+		return floats.stream().map(Float::doubleValue).toList();
 	}
 
 }

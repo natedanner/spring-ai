@@ -34,7 +34,7 @@ public class BedrockTitanChatProperties {
 	/**
 	 * Enable Bedrock Titan Chat Client. False by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * Bedrock Titan Chat generative name. Defaults to 'amazon.titan-text-express-v1'.

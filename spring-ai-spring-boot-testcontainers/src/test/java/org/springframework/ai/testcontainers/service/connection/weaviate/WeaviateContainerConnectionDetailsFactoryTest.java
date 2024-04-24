@@ -108,7 +108,7 @@ class WeaviateContainerConnectionDetailsFactoryTest {
 		assertThat(results.get(0).getId()).isEqualTo(nlDocument.getId());
 
 		// Remove all documents from the store
-		vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(doc -> doc.getId()).toList());
+		vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(Document::getId).toList());
 	}
 
 	@Configuration(proxyBeanMethods = false)

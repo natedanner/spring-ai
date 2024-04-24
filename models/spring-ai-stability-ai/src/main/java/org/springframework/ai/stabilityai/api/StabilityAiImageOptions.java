@@ -287,7 +287,7 @@ public class StabilityAiImageOptions implements ImageOptions {
 		return new Builder();
 	}
 
-	public static class Builder {
+	public static final class Builder {
 
 		private final StabilityAiImageOptions options;
 
@@ -461,10 +461,12 @@ public class StabilityAiImageOptions implements ImageOptions {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof StabilityAiImageOptions that))
+		}
+		if (!(o instanceof StabilityAiImageOptions that)) {
 			return false;
+		}
 		return Objects.equals(n, that.n) && Objects.equals(model, that.model) && Objects.equals(width, that.width)
 				&& Objects.equals(height, that.height) && Objects.equals(responseFormat, that.responseFormat)
 				&& Objects.equals(cfgScale, that.cfgScale)

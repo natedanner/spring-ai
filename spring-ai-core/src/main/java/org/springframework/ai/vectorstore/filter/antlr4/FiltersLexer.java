@@ -53,10 +53,32 @@ public class FiltersLexer extends Lexer {
 
 	protected static final PredictionContextCache _sharedContextCache = new PredictionContextCache();
 
-	public static final int WHERE = 1, DOT = 2, COMMA = 3, LEFT_SQUARE_BRACKETS = 4, RIGHT_SQUARE_BRACKETS = 5,
-			LEFT_PARENTHESIS = 6, RIGHT_PARENTHESIS = 7, EQUALS = 8, MINUS = 9, PLUS = 10, GT = 11, GE = 12, LT = 13,
-			LE = 14, NE = 15, AND = 16, OR = 17, IN = 18, NIN = 19, NOT = 20, BOOLEAN_VALUE = 21, QUOTED_STRING = 22,
-			INTEGER_VALUE = 23, DECIMAL_VALUE = 24, IDENTIFIER = 25, WS = 26;
+	public static final int WHERE = 1;
+	public static final int DOT = 2;
+	public static final int COMMA = 3;
+	public static final int LEFT_SQUARE_BRACKETS = 4;
+	public static final int RIGHT_SQUARE_BRACKETS = 5;
+	public static final int LEFT_PARENTHESIS = 6;
+	public static final int RIGHT_PARENTHESIS = 7;
+	public static final int EQUALS = 8;
+	public static final int MINUS = 9;
+	public static final int PLUS = 10;
+	public static final int GT = 11;
+	public static final int GE = 12;
+	public static final int LT = 13;
+	public static final int LE = 14;
+	public static final int NE = 15;
+	public static final int AND = 16;
+	public static final int OR = 17;
+	public static final int IN = 18;
+	public static final int NIN = 19;
+	public static final int NOT = 20;
+	public static final int BOOLEAN_VALUE = 21;
+	public static final int QUOTED_STRING = 22;
+	public static final int INTEGER_VALUE = 23;
+	public static final int DECIMAL_VALUE = 24;
+	public static final int IDENTIFIER = 25;
+	public static final int WS = 26;
 
 	public static String[] channelNames = { "DEFAULT_TOKEN_CHANNEL", "HIDDEN" };
 

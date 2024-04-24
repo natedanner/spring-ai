@@ -66,10 +66,12 @@ public class SpeechPrompt implements ModelRequest<SpeechMessage> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof SpeechPrompt that))
+		}
+		if (!(o instanceof SpeechPrompt that)) {
 			return false;
+		}
 		return Objects.equals(speechOptions, that.speechOptions) && Objects.equals(message, that.message);
 	}
 

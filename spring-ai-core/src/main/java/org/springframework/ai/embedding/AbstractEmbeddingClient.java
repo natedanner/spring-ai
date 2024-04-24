@@ -33,7 +33,7 @@ public abstract class AbstractEmbeddingClient implements EmbeddingClient {
 
 	protected final AtomicInteger embeddingDimensions = new AtomicInteger(-1);
 
-	private static Map<String, Integer> KNOWN_EMBEDDING_DIMENSIONS = loadKnownModelDimensions();
+	private static final Map<String, Integer> KNOWN_EMBEDDING_DIMENSIONS = loadKnownModelDimensions();
 
 	/**
 	 * Return the dimension of the requested embedding generative name. If the generative

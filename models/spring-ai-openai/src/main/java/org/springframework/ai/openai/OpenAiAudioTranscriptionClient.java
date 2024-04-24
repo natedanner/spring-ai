@@ -186,7 +186,7 @@ public class OpenAiAudioTranscriptionClient
 			}
 		}
 
-		OpenAiAudioApi.TranscriptionRequest audioTranscriptionRequest = OpenAiAudioApi.TranscriptionRequest.builder()
+		return OpenAiAudioApi.TranscriptionRequest.builder()
 			.withFile(toBytes(request.getInstructions()))
 			.withResponseFormat(options.getResponseFormat())
 			.withPrompt(options.getPrompt())
@@ -194,8 +194,6 @@ public class OpenAiAudioTranscriptionClient
 			.withLanguage(options.getLanguage())
 			.withModel(options.getModel())
 			.build();
-
-		return audioTranscriptionRequest;
 	}
 
 	private byte[] toBytes(Resource resource) {

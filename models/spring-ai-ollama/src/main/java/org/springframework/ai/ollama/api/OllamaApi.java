@@ -51,7 +51,7 @@ public class OllamaApi {
 
 	private static final Log logger = LogFactory.getLog(OllamaApi.class);
 
-	private final static String DEFAULT_BASE_URL = "http://localhost:11434";
+	private static final String DEFAULT_BASE_URL = "http://localhost:11434";
 
 	public static final String REQUEST_BODY_NULL_ERROR = "The request body can not be null.";
 
@@ -172,7 +172,7 @@ public class OllamaApi {
 		 * @param stream Whether to stream the response.
 		 */
 		public GenerateRequest(String model, String prompt, boolean enableJsonFormat, Boolean stream) {
-			this(model, prompt, (enableJsonFormat) ? "json" : null, null, null, null, null, stream, null, null, null);
+			this(model, prompt, enableJsonFormat ? "json" : null, null, null, null, null, stream, null, null, null);
 		}
 
 		/**
@@ -306,7 +306,7 @@ public class OllamaApi {
 	 */
 	public GenerateResponse generate(GenerateRequest completionRequest) {
 		Assert.notNull(completionRequest, REQUEST_BODY_NULL_ERROR);
-		Assert.isTrue(completionRequest.stream() == false, "Stream mode must be disabled.");
+		Assert.isTrue(!completionRequest.stream(), "Stream mode must be disabled.");
 
 		return this.restClient.post()
 			.uri("/api/generate")
@@ -372,7 +372,7 @@ public class OllamaApi {
 			/**
 			 * Assistant message type. Usually the response from the model.
 			 */
-			@JsonProperty("assistant") ASSISTANT;
+			@JsonProperty("assistant") ASSISTANT
 
 		}
 
@@ -437,7 +437,7 @@ public class OllamaApi {
 
 			private final String model;
 			private List<Message> messages = List.of();
-			private boolean stream = false;
+			private boolean stream;
 			private String format;
 			private String keepAlive;
 			private Map<String, Object> options = Map.of();

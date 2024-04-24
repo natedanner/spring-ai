@@ -118,7 +118,7 @@ public class PgVectorStoreIT {
 				assertThat(resultDoc.getMetadata()).containsKeys("meta2", "distance");
 
 				// Remove all documents from the store
-				vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+				vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 				List<Document> results2 = vectorStore
 					.similaritySearch(SearchRequest.query("Great Depression").withTopK(1));
@@ -287,7 +287,8 @@ public class PgVectorStoreIT {
 		}
 
 		Iterator<Float> iter = distances.iterator();
-		Float current, previous = iter.next();
+		Float current;
+		Float previous = iter.next();
 		while (iter.hasNext()) {
 			current = iter.next();
 			if (previous > current) {

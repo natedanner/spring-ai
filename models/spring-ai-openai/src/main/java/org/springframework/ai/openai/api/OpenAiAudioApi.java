@@ -67,13 +67,11 @@ public class OpenAiAudioApi {
 	public OpenAiAudioApi(String baseUrl, String openAiToken, RestClient.Builder restClientBuilder,
 			ResponseErrorHandler responseErrorHandler) {
 
-		this.restClient = restClientBuilder.baseUrl(baseUrl).defaultHeaders(headers -> {
-			headers.setBearerAuth(openAiToken);
-		}).defaultStatusHandler(responseErrorHandler).build();
+		this.restClient = restClientBuilder.baseUrl(baseUrl).defaultHeaders(headers ->
+			headers.setBearerAuth(openAiToken)).defaultStatusHandler(responseErrorHandler).build();
 
-		this.webClient = WebClient.builder().baseUrl(baseUrl).defaultHeaders(headers -> {
-			headers.setBearerAuth(openAiToken);
-		}).defaultHeaders(ApiUtils.getJsonContentHeaders(openAiToken)).build();
+		this.webClient = WebClient.builder().baseUrl(baseUrl).defaultHeaders(headers ->
+			headers.setBearerAuth(openAiToken)).defaultHeaders(ApiUtils.getJsonContentHeaders(openAiToken)).build();
 	}
 
 	/**
@@ -87,13 +85,11 @@ public class OpenAiAudioApi {
 	public OpenAiAudioApi(String baseUrl, String openAiToken, RestClient.Builder restClientBuilder,
 			WebClient.Builder webClientBuilder, ResponseErrorHandler responseErrorHandler) {
 
-		this.restClient = restClientBuilder.baseUrl(baseUrl).defaultHeaders(headers -> {
-			headers.setBearerAuth(openAiToken);
-		}).defaultStatusHandler(responseErrorHandler).build();
+		this.restClient = restClientBuilder.baseUrl(baseUrl).defaultHeaders(headers ->
+			headers.setBearerAuth(openAiToken)).defaultStatusHandler(responseErrorHandler).build();
 
-		this.webClient = webClientBuilder.baseUrl(baseUrl).defaultHeaders(headers -> {
-			headers.setBearerAuth(openAiToken);
-		}).defaultHeaders(ApiUtils.getJsonContentHeaders(openAiToken)).build();
+		this.webClient = webClientBuilder.baseUrl(baseUrl).defaultHeaders(headers ->
+			headers.setBearerAuth(openAiToken)).defaultHeaders(ApiUtils.getJsonContentHeaders(openAiToken)).build();
 	}
 
 	/**

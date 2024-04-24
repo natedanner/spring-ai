@@ -94,10 +94,12 @@ public class ChatResponse implements ModelResponse<Generation> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ChatResponse that))
+		}
+		if (!(o instanceof ChatResponse that)) {
 			return false;
+		}
 		return Objects.equals(chatResponseMetadata, that.chatResponseMetadata)
 				&& Objects.equals(generations, that.generations);
 	}

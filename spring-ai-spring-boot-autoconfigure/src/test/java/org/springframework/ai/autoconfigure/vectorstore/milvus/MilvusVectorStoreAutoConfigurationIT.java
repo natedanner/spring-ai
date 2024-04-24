@@ -107,7 +107,7 @@ public class MilvusVectorStoreAutoConfigurationIT {
 				assertThat(resultDoc.getMetadata()).containsKeys("spring", "distance");
 
 				// Remove all documents from the store
-				vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+				vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 				results = vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 				assertThat(results).hasSize(0);

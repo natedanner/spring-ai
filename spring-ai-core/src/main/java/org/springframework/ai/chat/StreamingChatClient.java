@@ -28,15 +28,15 @@ public interface StreamingChatClient extends StreamingModelClient<Prompt, ChatRe
 
 	default Flux<String> stream(String message) {
 		Prompt prompt = new Prompt(message);
-		return stream(prompt).map(response -> (response.getResult() == null || response.getResult().getOutput() == null
-				|| response.getResult().getOutput().getContent() == null) ? ""
+		return stream(prompt).map(response -> response.getResult() == null || response.getResult().getOutput() == null
+				|| response.getResult().getOutput().getContent() == null ? ""
 						: response.getResult().getOutput().getContent());
 	}
 
 	default Flux<String> stream(Message... messages) {
 		Prompt prompt = new Prompt(Arrays.asList(messages));
-		return stream(prompt).map(response -> (response.getResult() == null || response.getResult().getOutput() == null
-				|| response.getResult().getOutput().getContent() == null) ? ""
+		return stream(prompt).map(response -> response.getResult() == null || response.getResult().getOutput() == null
+				|| response.getResult().getOutput().getContent() == null ? ""
 						: response.getResult().getOutput().getContent());
 	}
 

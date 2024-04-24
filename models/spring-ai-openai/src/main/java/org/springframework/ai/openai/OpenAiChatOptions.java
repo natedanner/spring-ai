@@ -429,130 +429,165 @@ public class OpenAiChatOptions implements FunctionCallingOptions, ChatOptions {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((frequencyPenalty == null) ? 0 : frequencyPenalty.hashCode());
-		result = prime * result + ((logitBias == null) ? 0 : logitBias.hashCode());
-		result = prime * result + ((logprobs == null) ? 0 : logprobs.hashCode());
-		result = prime * result + ((topLogprobs == null) ? 0 : topLogprobs.hashCode());
-		result = prime * result + ((maxTokens == null) ? 0 : maxTokens.hashCode());
-		result = prime * result + ((n == null) ? 0 : n.hashCode());
-		result = prime * result + ((presencePenalty == null) ? 0 : presencePenalty.hashCode());
-		result = prime * result + ((responseFormat == null) ? 0 : responseFormat.hashCode());
-		result = prime * result + ((seed == null) ? 0 : seed.hashCode());
-		result = prime * result + ((stop == null) ? 0 : stop.hashCode());
-		result = prime * result + ((temperature == null) ? 0 : temperature.hashCode());
-		result = prime * result + ((topP == null) ? 0 : topP.hashCode());
-		result = prime * result + ((tools == null) ? 0 : tools.hashCode());
-		result = prime * result + ((toolChoice == null) ? 0 : toolChoice.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + (model == null ? 0 : model.hashCode());
+		result = prime * result + (frequencyPenalty == null ? 0 : frequencyPenalty.hashCode());
+		result = prime * result + (logitBias == null ? 0 : logitBias.hashCode());
+		result = prime * result + (logprobs == null ? 0 : logprobs.hashCode());
+		result = prime * result + (topLogprobs == null ? 0 : topLogprobs.hashCode());
+		result = prime * result + (maxTokens == null ? 0 : maxTokens.hashCode());
+		result = prime * result + (n == null ? 0 : n.hashCode());
+		result = prime * result + (presencePenalty == null ? 0 : presencePenalty.hashCode());
+		result = prime * result + (responseFormat == null ? 0 : responseFormat.hashCode());
+		result = prime * result + (seed == null ? 0 : seed.hashCode());
+		result = prime * result + (stop == null ? 0 : stop.hashCode());
+		result = prime * result + (temperature == null ? 0 : temperature.hashCode());
+		result = prime * result + (topP == null ? 0 : topP.hashCode());
+		result = prime * result + (tools == null ? 0 : tools.hashCode());
+		result = prime * result + (toolChoice == null ? 0 : toolChoice.hashCode());
+		result = prime * result + (user == null ? 0 : user.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		OpenAiChatOptions other = (OpenAiChatOptions) obj;
 		if (this.model == null) {
-			if (other.model != null)
+			if (other.model != null) {
 				return false;
+			}
 		}
-		else if (!model.equals(other.model))
+		else if (!model.equals(other.model)) {
 			return false;
+		}
 		if (this.frequencyPenalty == null) {
-			if (other.frequencyPenalty != null)
+			if (other.frequencyPenalty != null) {
 				return false;
+			}
 		}
-		else if (!this.frequencyPenalty.equals(other.frequencyPenalty))
+		else if (!this.frequencyPenalty.equals(other.frequencyPenalty)) {
 			return false;
+		}
 		if (this.logitBias == null) {
-			if (other.logitBias != null)
+			if (other.logitBias != null) {
 				return false;
+			}
 		}
-		else if (!this.logitBias.equals(other.logitBias))
+		else if (!this.logitBias.equals(other.logitBias)) {
 			return false;
+		}
 		if (this.logprobs == null) {
-			if (other.logprobs != null)
+			if (other.logprobs != null) {
 				return false;
+			}
 		}
-		else if (!this.logprobs.equals(other.logprobs))
+		else if (!this.logprobs.equals(other.logprobs)) {
 			return false;
+		}
 		if (this.topLogprobs == null) {
-			if (other.topLogprobs != null)
+			if (other.topLogprobs != null) {
 				return false;
+			}
 		}
-		else if (!this.topLogprobs.equals(other.topLogprobs))
+		else if (!this.topLogprobs.equals(other.topLogprobs)) {
 			return false;
+		}
 		if (this.maxTokens == null) {
-			if (other.maxTokens != null)
+			if (other.maxTokens != null) {
 				return false;
+			}
 		}
-		else if (!this.maxTokens.equals(other.maxTokens))
+		else if (!this.maxTokens.equals(other.maxTokens)) {
 			return false;
+		}
 		if (this.n == null) {
-			if (other.n != null)
+			if (other.n != null) {
 				return false;
+			}
 		}
-		else if (!this.n.equals(other.n))
+		else if (!this.n.equals(other.n)) {
 			return false;
+		}
 		if (this.presencePenalty == null) {
-			if (other.presencePenalty != null)
+			if (other.presencePenalty != null) {
 				return false;
+			}
 		}
-		else if (!this.presencePenalty.equals(other.presencePenalty))
+		else if (!this.presencePenalty.equals(other.presencePenalty)) {
 			return false;
+		}
 		if (this.responseFormat == null) {
-			if (other.responseFormat != null)
+			if (other.responseFormat != null) {
 				return false;
+			}
 		}
-		else if (!this.responseFormat.equals(other.responseFormat))
+		else if (!this.responseFormat.equals(other.responseFormat)) {
 			return false;
+		}
 		if (this.seed == null) {
-			if (other.seed != null)
+			if (other.seed != null) {
 				return false;
+			}
 		}
-		else if (!this.seed.equals(other.seed))
+		else if (!this.seed.equals(other.seed)) {
 			return false;
+		}
 		if (this.stop == null) {
-			if (other.stop != null)
+			if (other.stop != null) {
 				return false;
+			}
 		}
-		else if (!stop.equals(other.stop))
+		else if (!stop.equals(other.stop)) {
 			return false;
+		}
 		if (this.temperature == null) {
-			if (other.temperature != null)
+			if (other.temperature != null) {
 				return false;
+			}
 		}
-		else if (!this.temperature.equals(other.temperature))
+		else if (!this.temperature.equals(other.temperature)) {
 			return false;
+		}
 		if (this.topP == null) {
-			if (other.topP != null)
+			if (other.topP != null) {
 				return false;
+			}
 		}
-		else if (!topP.equals(other.topP))
+		else if (!topP.equals(other.topP)) {
 			return false;
+		}
 		if (this.tools == null) {
-			if (other.tools != null)
+			if (other.tools != null) {
 				return false;
+			}
 		}
-		else if (!tools.equals(other.tools))
+		else if (!tools.equals(other.tools)) {
 			return false;
+		}
 		if (this.toolChoice == null) {
-			if (other.toolChoice != null)
+			if (other.toolChoice != null) {
 				return false;
+			}
 		}
-		else if (!toolChoice.equals(other.toolChoice))
+		else if (!toolChoice.equals(other.toolChoice)) {
 			return false;
+		}
 		if (this.user == null) {
-			if (other.user != null)
+			if (other.user != null) {
 				return false;
+			}
 		}
-		else if (!this.user.equals(other.user))
+		else if (!this.user.equals(other.user)) {
 			return false;
+		}
 		return true;
 	}
 

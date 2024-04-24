@@ -31,7 +31,7 @@ public class ContentFormatTransformer implements DocumentTransformer {
 	/**
 	 * Disable the content-formatter template rewrite.
 	 */
-	private boolean disableTemplateRewrite = false;
+	private boolean disableTemplateRewrite;
 
 	private ContentFormatter contentFormatter;
 

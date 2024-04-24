@@ -196,7 +196,7 @@ public class VertexAiGeminiChatOptions implements FunctionCallingOptions, ChatOp
 	@Override
 	@JsonIgnore
 	public Integer getTopK() {
-		return (this.topK != null) ? this.topK.intValue() : null;
+		return this.topK != null ? this.topK.intValue() : null;
 	}
 
 	public void setTopK(Float topK) {
@@ -205,7 +205,7 @@ public class VertexAiGeminiChatOptions implements FunctionCallingOptions, ChatOp
 
 	@JsonIgnore
 	public void setTopK(Integer topK) {
-		this.topK = (topK != null) ? topK.floatValue() : null;
+		this.topK = topK != null ? topK.floatValue() : null;
 	}
 
 	public Integer getCandidateCount() {
@@ -252,81 +252,102 @@ public class VertexAiGeminiChatOptions implements FunctionCallingOptions, ChatOp
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((stopSequences == null) ? 0 : stopSequences.hashCode());
-		result = prime * result + ((temperature == null) ? 0 : temperature.hashCode());
-		result = prime * result + ((topP == null) ? 0 : topP.hashCode());
-		result = prime * result + ((topK == null) ? 0 : topK.hashCode());
-		result = prime * result + ((candidateCount == null) ? 0 : candidateCount.hashCode());
-		result = prime * result + ((maxOutputTokens == null) ? 0 : maxOutputTokens.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((functionCallbacks == null) ? 0 : functionCallbacks.hashCode());
-		result = prime * result + ((functions == null) ? 0 : functions.hashCode());
+		result = prime * result + (stopSequences == null ? 0 : stopSequences.hashCode());
+		result = prime * result + (temperature == null ? 0 : temperature.hashCode());
+		result = prime * result + (topP == null ? 0 : topP.hashCode());
+		result = prime * result + (topK == null ? 0 : topK.hashCode());
+		result = prime * result + (candidateCount == null ? 0 : candidateCount.hashCode());
+		result = prime * result + (maxOutputTokens == null ? 0 : maxOutputTokens.hashCode());
+		result = prime * result + (model == null ? 0 : model.hashCode());
+		result = prime * result + (functionCallbacks == null ? 0 : functionCallbacks.hashCode());
+		result = prime * result + (functions == null ? 0 : functions.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		VertexAiGeminiChatOptions other = (VertexAiGeminiChatOptions) obj;
 		if (stopSequences == null) {
-			if (other.stopSequences != null)
+			if (other.stopSequences != null) {
 				return false;
+			}
 		}
-		else if (!stopSequences.equals(other.stopSequences))
+		else if (!stopSequences.equals(other.stopSequences)) {
 			return false;
+		}
 		if (temperature == null) {
-			if (other.temperature != null)
+			if (other.temperature != null) {
 				return false;
+			}
 		}
-		else if (!temperature.equals(other.temperature))
+		else if (!temperature.equals(other.temperature)) {
 			return false;
+		}
 		if (topP == null) {
-			if (other.topP != null)
+			if (other.topP != null) {
 				return false;
+			}
 		}
-		else if (!topP.equals(other.topP))
+		else if (!topP.equals(other.topP)) {
 			return false;
+		}
 		if (topK == null) {
-			if (other.topK != null)
+			if (other.topK != null) {
 				return false;
+			}
 		}
-		else if (!topK.equals(other.topK))
+		else if (!topK.equals(other.topK)) {
 			return false;
+		}
 		if (candidateCount == null) {
-			if (other.candidateCount != null)
+			if (other.candidateCount != null) {
 				return false;
+			}
 		}
-		else if (!candidateCount.equals(other.candidateCount))
+		else if (!candidateCount.equals(other.candidateCount)) {
 			return false;
+		}
 		if (maxOutputTokens == null) {
-			if (other.maxOutputTokens != null)
+			if (other.maxOutputTokens != null) {
 				return false;
+			}
 		}
-		else if (!maxOutputTokens.equals(other.maxOutputTokens))
+		else if (!maxOutputTokens.equals(other.maxOutputTokens)) {
 			return false;
+		}
 		if (model == null) {
-			if (other.model != null)
+			if (other.model != null) {
 				return false;
+			}
 		}
-		else if (!model.equals(other.model))
+		else if (!model.equals(other.model)) {
 			return false;
+		}
 		if (functionCallbacks == null) {
-			if (other.functionCallbacks != null)
+			if (other.functionCallbacks != null) {
 				return false;
+			}
 		}
-		else if (!functionCallbacks.equals(other.functionCallbacks))
+		else if (!functionCallbacks.equals(other.functionCallbacks)) {
 			return false;
+		}
 		if (functions == null) {
-			if (other.functions != null)
+			if (other.functions != null) {
 				return false;
+			}
 		}
-		else if (!functions.equals(other.functions))
+		else if (!functions.equals(other.functions)) {
 			return false;
+		}
 		return true;
 	}
 

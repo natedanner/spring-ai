@@ -29,7 +29,7 @@ import org.springframework.util.CollectionUtils;
  */
 public abstract class AbstractFunctionCallSupport<Msg, Req, Resp> {
 
-	protected final static boolean IS_RUNTIME_CALL = true;
+	protected static final boolean IS_RUNTIME_CALL = true;
 
 	/**
 	 * The function callback register is used to resolve the function callbacks by name.
@@ -147,15 +147,15 @@ public abstract class AbstractFunctionCallSupport<Msg, Req, Resp> {
 		return this.callWithFunctionSupport(newRequest);
 	}
 
-	abstract protected Req doCreateToolResponseRequest(Req previousRequest, Msg responseMessage,
+	protected abstract Req doCreateToolResponseRequest(Req previousRequest, Msg responseMessage,
 			List<Msg> conversationHistory);
 
-	abstract protected List<Msg> doGetUserMessages(Req request);
+	protected abstract List<Msg> doGetUserMessages(Req request);
 
-	abstract protected Msg doGetToolResponseMessage(Resp response);
+	protected abstract Msg doGetToolResponseMessage(Resp response);
 
-	abstract protected Resp doChatCompletion(Req request);
+	protected abstract Resp doChatCompletion(Req request);
 
-	abstract protected boolean isToolFunctionCall(Resp response);
+	protected abstract boolean isToolFunctionCall(Resp response);
 
 }

@@ -78,7 +78,7 @@ public class ChromaVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("meta2", "distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			List<Document> results2 = vectorStore.similaritySearch(SearchRequest.query("Great").withTopK(1));
 			assertThat(results2).hasSize(0);
@@ -120,7 +120,7 @@ public class ChromaVectorStoreIT {
 			assertThat(results.get(0).getId()).isEqualTo(bgDocument.getId());
 
 			// Remove all documents from the store
-			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(Document::getId).toList());
 		});
 	}
 
@@ -195,7 +195,7 @@ public class ChromaVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKey("distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 		});
 	}
 

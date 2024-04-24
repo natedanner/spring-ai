@@ -52,15 +52,15 @@ public class OpenAiStreamFunctionCallingHelper {
 			return current;
 		}
 
-		String id = (current.id() != null ? current.id() : previous.id());
-		Long created = (current.created() != null ? current.created() : previous.created());
-		String model = (current.model() != null ? current.model() : previous.model());
-		String systemFingerprint = (current.systemFingerprint() != null ? current.systemFingerprint()
-				: previous.systemFingerprint());
-		String object = (current.object() != null ? current.object() : previous.object());
+		String id = current.id() != null ? current.id() : previous.id();
+		Long created = current.created() != null ? current.created() : previous.created();
+		String model = current.model() != null ? current.model() : previous.model();
+		String systemFingerprint = current.systemFingerprint() != null ? current.systemFingerprint()
+				: previous.systemFingerprint();
+		String object = current.object() != null ? current.object() : previous.object();
 
-		ChunkChoice previousChoice0 = (CollectionUtils.isEmpty(previous.choices()) ? null : previous.choices().get(0));
-		ChunkChoice currentChoice0 = (CollectionUtils.isEmpty(current.choices()) ? null : current.choices().get(0));
+		ChunkChoice previousChoice0 = CollectionUtils.isEmpty(previous.choices()) ? null : previous.choices().get(0);
+		ChunkChoice currentChoice0 = CollectionUtils.isEmpty(current.choices()) ? null : current.choices().get(0);
 
 		ChunkChoice choice = merge(previousChoice0, currentChoice0);
 		List<ChunkChoice> chunkChoices = choice == null ? List.of() : List.of(choice);
@@ -72,23 +72,23 @@ public class OpenAiStreamFunctionCallingHelper {
 			return current;
 		}
 
-		ChatCompletionFinishReason finishReason = (current.finishReason() != null ? current.finishReason()
-				: previous.finishReason());
-		Integer index = (current.index() != null ? current.index() : previous.index());
+		ChatCompletionFinishReason finishReason = current.finishReason() != null ? current.finishReason()
+				: previous.finishReason();
+		Integer index = current.index() != null ? current.index() : previous.index();
 
 		ChatCompletionMessage message = merge(previous.delta(), current.delta());
 
-		LogProbs logprobs = (current.logprobs() != null ? current.logprobs() : previous.logprobs());
+		LogProbs logprobs = current.logprobs() != null ? current.logprobs() : previous.logprobs();
 		return new ChunkChoice(finishReason, index, message, logprobs);
 	}
 
 	private ChatCompletionMessage merge(ChatCompletionMessage previous, ChatCompletionMessage current) {
-		String content = (current.content() != null ? current.content()
-				: "" + ((previous.content() != null) ? previous.content() : ""));
-		Role role = (current.role() != null ? current.role() : previous.role());
-		role = (role != null ? role : Role.ASSISTANT); // default to ASSISTANT (if null
-		String name = (current.name() != null ? current.name() : previous.name());
-		String toolCallId = (current.toolCallId() != null ? current.toolCallId() : previous.toolCallId());
+		String content = current.content() != null ? current.content()
+				: "" + (previous.content() != null ? previous.content() : "");
+		Role role = current.role() != null ? current.role() : previous.role();
+		role = role != null ? role : Role.ASSISTANT; // default to ASSISTANT (if null
+		String name = current.name() != null ? current.name() : previous.name();
+		String toolCallId = current.toolCallId() != null ? current.toolCallId() : previous.toolCallId();
 
 		List<ToolCall> toolCalls = new ArrayList<>();
 		ToolCall lastPreviousTooCall = null;
@@ -125,8 +125,8 @@ public class OpenAiStreamFunctionCallingHelper {
 		if (previous == null) {
 			return current;
 		}
-		String id = (current.id() != null ? current.id() : previous.id());
-		String type = (current.type() != null ? current.type() : previous.type());
+		String id = current.id() != null ? current.id() : previous.id();
+		String type = current.type() != null ? current.type() : previous.type();
 		ChatCompletionFunction function = merge(previous.function(), current.function());
 		return new ToolCall(id, type, function);
 	}
@@ -135,7 +135,7 @@ public class OpenAiStreamFunctionCallingHelper {
 		if (previous == null) {
 			return current;
 		}
-		String name = (current.name() != null ? current.name() : previous.name());
+		String name = current.name() != null ? current.name() : previous.name();
 		StringBuilder arguments = new StringBuilder();
 		if (previous.arguments() != null) {
 			arguments.append(previous.arguments());

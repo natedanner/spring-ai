@@ -30,7 +30,7 @@ import java.util.Objects;
  *
  * @author Christian Tzolov
  */
-public class SearchRequest {
+public final class SearchRequest {
 
 	/**
 	 * Similarity threshold that accepts all search scores. A threshold value of 0.0 means
@@ -225,7 +225,7 @@ public class SearchRequest {
 	 * @return this.builder
 	 */
 	public SearchRequest withFilterExpression(String textExpression) {
-		this.filterExpression = (textExpression != null) ? new FilterExpressionTextParser().parse(textExpression)
+		this.filterExpression = textExpression != null ? new FilterExpressionTextParser().parse(textExpression)
 				: null;
 		return this;
 	}
@@ -258,10 +258,12 @@ public class SearchRequest {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		SearchRequest that = (SearchRequest) o;
 		return topK == that.topK && Double.compare(that.similarityThreshold, similarityThreshold) == 0
 				&& Objects.equals(query, that.query) && Objects.equals(filterExpression, that.filterExpression);

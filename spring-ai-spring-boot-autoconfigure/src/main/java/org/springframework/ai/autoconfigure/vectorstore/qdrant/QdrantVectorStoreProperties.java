@@ -44,12 +44,12 @@ public class QdrantVectorStoreProperties {
 	/**
 	 * Whether to use TLS(HTTPS). Defaults to false.
 	 */
-	private boolean useTls = false;
+	private boolean useTls;
 
 	/**
 	 * The API key to use for authentication with the Qdrant server.
 	 */
-	private String apiKey = null;
+	private String apiKey;
 
 	public String getCollectionName() {
 		return this.collectionName;

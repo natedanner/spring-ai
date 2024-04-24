@@ -41,7 +41,7 @@ public class RedisFilterExpressionConverter extends AbstractFilterExpressionConv
 
 	public static final NumericBoundary NEGATIVE_INFINITY = new NumericBoundary(Double.NEGATIVE_INFINITY, true);
 
-	private Map<String, MetadataField> metadataFields;
+	private final Map<String, MetadataField> metadataFields;
 
 	public RedisFilterExpressionConverter(List<MetadataField> metadataFields) {
 		this.metadataFields = metadataFields.stream()

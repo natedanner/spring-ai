@@ -31,9 +31,8 @@ public class HuggingfaceTestConfiguration {
 		}
 		// Created aws-mistral-7b-instruct-v0-1-805 via
 		// https://ui.endpoints.huggingface.co/
-		HuggingfaceChatClient huggingfaceChatClient = new HuggingfaceChatClient(apiKey,
+		return new HuggingfaceChatClient(apiKey,
 				"https://f6hg7b3cvlmntp5i.us-east-1.aws.endpoints.huggingface.cloud");
-		return huggingfaceChatClient;
 	}
 
 }

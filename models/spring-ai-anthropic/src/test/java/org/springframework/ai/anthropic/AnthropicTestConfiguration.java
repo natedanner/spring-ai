@@ -39,8 +39,7 @@ public class AnthropicTestConfiguration {
 
 	@Bean
 	public AnthropicChatClient openAiChatClient(AnthropicApi api) {
-		AnthropicChatClient anthropicChatClient = new AnthropicChatClient(api);
-		return anthropicChatClient;
+		return new AnthropicChatClient(api);
 	}
 
 }

@@ -36,7 +36,7 @@ public class OpenAiAudioSpeechProperties extends OpenAiParentProperties {
 
 	public static final String DEFAULT_SPEECH_MODEL = OpenAiAudioApi.TtsModel.TTS_1.getValue();
 
-	private static final Float SPEED = 1.0f;
+	private static final Float SPEED = 1.0F;
 
 	private static final OpenAiAudioApi.SpeechRequest.Voice VOICE = OpenAiAudioApi.SpeechRequest.Voice.ALLOY;
 

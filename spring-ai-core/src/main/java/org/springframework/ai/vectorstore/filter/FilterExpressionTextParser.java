@@ -217,9 +217,8 @@ public class FilterExpressionTextParser {
 		@Override
 		public Filter.Operand visitConstantArray(FiltersParser.ConstantArrayContext ctx) {
 			List<Object> list = new ArrayList<>();
-			ctx.constant().forEach(constantCtx -> {
-				list.add(((Filter.Value) this.visit(constantCtx)).value());
-			});
+			ctx.constant().forEach(constantCtx ->
+				list.add(((Filter.Value) this.visit(constantCtx)).value()));
 			return new Filter.Value(list);
 		}
 

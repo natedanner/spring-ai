@@ -37,7 +37,7 @@ public class BedrockAnthropicChatProperties {
 	/**
 	 * Enable Bedrock Anthropic chat client. Disabled by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * The generative id to use. See the {@link AnthropicChatModel} for the supported

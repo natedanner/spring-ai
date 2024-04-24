@@ -111,11 +111,11 @@ class WikiVectorStoreExample {
 					return format("%s§¶%s", primaryKeys.get(2), primaryKeys.get(3));
 				})
 
-				.withDocumentIdTranslator((id) -> {
+				.withDocumentIdTranslator(id -> {
 					String[] parts = id.split("§¶");
 					String title = parts[0];
-					int chunk_no = 0 < parts.length ? Integer.parseInt(parts[1]) : 0;
-					return List.of("simplewiki", "en", title, chunk_no, 0);
+					int chunkNo = 0 < parts.length ? Integer.parseInt(parts[1]) : 0;
+					return List.of("simplewiki", "en", title, chunkNo, 0);
 				})
 				.build();
 

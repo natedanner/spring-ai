@@ -109,7 +109,7 @@ public class FunctionCallbackWrapperIT {
 			return FunctionCallbackWrapper.builder(new MockWeatherService())
 				.withName("WeatherInfo")
 				.withDescription("Get the weather in location")
-				.withResponseConverter((response) -> "" + response.temp() + response.unit())
+				.withResponseConverter(response -> "" + response.temp() + response.unit())
 				.build();
 		}
 

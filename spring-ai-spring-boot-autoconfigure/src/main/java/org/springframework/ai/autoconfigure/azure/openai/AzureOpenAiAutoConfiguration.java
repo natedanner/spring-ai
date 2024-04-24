@@ -66,10 +66,8 @@ public class AzureOpenAiAutoConfiguration {
 			chatProperties.getOptions().getFunctionCallbacks().addAll(toolFunctionCallbacks);
 		}
 
-		AzureOpenAiChatClient azureOpenAiChatClient = new AzureOpenAiChatClient(openAIClient,
+		return new AzureOpenAiChatClient(openAIClient,
 				chatProperties.getOptions(), functionCallbackContext);
-
-		return azureOpenAiChatClient;
 	}
 
 	@Bean

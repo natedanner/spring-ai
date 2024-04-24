@@ -101,7 +101,7 @@ public class PgVectorStore implements VectorStore, InitializingBean {
 		 * speed-recall tradeoff). There’s no training step like IVFFlat, so the index can
 		 * be created without any data in the table.
 		 */
-		HNSW;
+		HNSW
 
 	}
 
@@ -286,7 +286,7 @@ public class PgVectorStore implements VectorStore, InitializingBean {
 	@Override
 	public List<Document> similaritySearch(SearchRequest request) {
 
-		String nativeFilterExpression = (request.getFilterExpression() != null)
+		String nativeFilterExpression = request.getFilterExpression() != null
 				? this.filterExpressionConverter.convertExpression(request.getFilterExpression()) : "";
 
 		String jsonPathFilter = "";

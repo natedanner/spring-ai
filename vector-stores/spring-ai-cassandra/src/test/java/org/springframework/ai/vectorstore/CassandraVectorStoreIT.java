@@ -114,7 +114,7 @@ class CassandraVectorStoreIT {
 				assertThat(resultDoc.getMetadata()).containsKeys("meta1", CassandraVectorStore.SIMILARITY_FIELD_NAME);
 
 				// Remove all documents from the store
-				store.delete(documents.stream().map(doc -> doc.getId()).toList());
+				store.delete(documents.stream().map(Document::getId).toList());
 
 				results = store.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 				assertThat(results).isEmpty();

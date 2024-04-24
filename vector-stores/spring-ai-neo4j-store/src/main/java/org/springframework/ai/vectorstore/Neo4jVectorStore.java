@@ -109,7 +109,7 @@ public class Neo4jVectorStore implements VectorStore, InitializingBean {
 			this.idProperty = SchemaNames.sanitize(builder.idProperty).orElseThrow();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String databaseName;
 

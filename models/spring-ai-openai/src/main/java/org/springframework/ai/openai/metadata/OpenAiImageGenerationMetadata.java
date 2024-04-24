@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class OpenAiImageGenerationMetadata implements ImageGenerationMetadata {
 
-	private String revisedPrompt;
+	private final String revisedPrompt;
 
 	public OpenAiImageGenerationMetadata(String revisedPrompt) {
 		this.revisedPrompt = revisedPrompt;
@@ -38,10 +38,12 @@ public class OpenAiImageGenerationMetadata implements ImageGenerationMetadata {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof OpenAiImageGenerationMetadata that))
+		}
+		if (!(o instanceof OpenAiImageGenerationMetadata that)) {
 			return false;
+		}
 		return Objects.equals(revisedPrompt, that.revisedPrompt);
 	}
 

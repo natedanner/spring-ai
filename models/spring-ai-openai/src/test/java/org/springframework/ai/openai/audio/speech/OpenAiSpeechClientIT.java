@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EnabledIfEnvironmentVariable(named = "OPENAI_API_KEY", matches = ".+")
 class OpenAiSpeechClientIT extends AbstractIT {
 
-	private static final Float SPEED = 1.0f;
+	private static final Float SPEED = 1.0F;
 
 	@Test
 	void shouldSuccessfullyStreamAudioBytesForEmptyMessage() {

@@ -40,9 +40,8 @@ public class AzureOpenAiChatResponseMetadata implements ChatResponseMetadata {
 		Assert.notNull(chatCompletions, "Azure OpenAI ChatCompletions must not be null");
 		String id = chatCompletions.getId();
 		AzureOpenAiUsage usage = AzureOpenAiUsage.from(chatCompletions);
-		AzureOpenAiChatResponseMetadata chatResponseMetadata = new AzureOpenAiChatResponseMetadata(id, usage,
+		return new AzureOpenAiChatResponseMetadata(id, usage,
 				promptFilterMetadata);
-		return chatResponseMetadata;
 	}
 
 	private final String id;

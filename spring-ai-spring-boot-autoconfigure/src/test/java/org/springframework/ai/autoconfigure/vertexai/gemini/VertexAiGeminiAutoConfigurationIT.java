@@ -58,9 +58,7 @@ public class VertexAiGeminiAutoConfigurationIT {
 		contextRunner.run(context -> {
 			VertexAiGeminiChatClient client = context.getBean(VertexAiGeminiChatClient.class);
 			Flux<ChatResponse> responseFlux = client.stream(new Prompt(new UserMessage("Hello")));
-			String response = responseFlux.collectList().block().stream().map(chatResponse -> {
-				return chatResponse.getResults().get(0).getOutput().getContent();
-			}).collect(Collectors.joining());
+			String response = responseFlux.collectList().block().stream().map(chatResponse -> chatResponse.getResults().get(0).getOutput().getContent()).collect(Collectors.joining());
 
 			assertThat(response).isNotEmpty();
 			logger.info("Response: " + response);

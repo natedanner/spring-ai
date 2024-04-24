@@ -58,10 +58,12 @@ public class Generation implements ModelResult<AssistantMessage> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Generation that))
+		}
+		if (!(o instanceof Generation that)) {
 			return false;
+		}
 		return Objects.equals(assistantMessage, that.assistantMessage)
 				&& Objects.equals(chatGenerationMetadata, that.chatGenerationMetadata);
 	}

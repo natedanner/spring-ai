@@ -59,7 +59,7 @@ public class ParagraphManager {
 
 		@Override
 		public String toString() {
-			String indent = (level < 0) ? "" : new String(new char[level * 2]).replace('\0', ' ');
+			String indent = level < 0 ? "" : new String(new char[level * 2]).replace('\0', ' ');
 
 			return indent + " " + level + ") " + title + " [" + startPageNumber + "," + endPageNumber + "], children = "
 					+ children.size() + ", pos = " + position;
@@ -145,7 +145,7 @@ public class ParagraphManager {
 				nextSiblingNumber = getPageNumber(current.getLastChild());
 			}
 
-			var paragraphPosition = (current.getDestination() instanceof PDPageXYZDestination)
+			var paragraphPosition = current.getDestination() instanceof PDPageXYZDestination
 					? ((PDPageXYZDestination) current.getDestination()).getTop() : 0;
 
 			var currentParagraph = new Paragraph(parentParagraph, current.getTitle(), level, pageNumber,

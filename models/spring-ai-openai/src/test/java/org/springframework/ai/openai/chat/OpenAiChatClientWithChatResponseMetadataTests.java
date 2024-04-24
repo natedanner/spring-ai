@@ -50,7 +50,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(OpenAiChatClientWithChatResponseMetadataTests.Config.class)
 public class OpenAiChatClientWithChatResponseMetadataTests {
 
-	private static String TEST_API_KEY = "sk-1234567890";
+	private static String testApiKey = "sk-1234567890";
 
 	@Autowired
 	private OpenAiChatClient openAiChatClient;
@@ -129,7 +129,7 @@ public class OpenAiChatClientWithChatResponseMetadataTests {
 
 		server.expect(requestTo("/v1/chat/completions"))
 			.andExpect(method(HttpMethod.POST))
-			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + TEST_API_KEY))
+			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + testApiKey))
 			.andRespond(withSuccess(getJson(), MediaType.APPLICATION_JSON).headers(httpHeaders));
 
 	}
@@ -163,7 +163,7 @@ public class OpenAiChatClientWithChatResponseMetadataTests {
 
 		@Bean
 		public OpenAiApi chatCompletionApi(RestClient.Builder builder) {
-			return new OpenAiApi("", TEST_API_KEY, builder);
+			return new OpenAiApi("", testApiKey, builder);
 		}
 
 		@Bean

@@ -45,7 +45,7 @@ import org.springframework.web.client.RestTemplate;
 public class ChromaApi {
 
 	// Regular expression pattern that looks for a message inside the ValueError(...).
-	private static Pattern VALUE_ERROR_PATTERN = Pattern.compile("ValueError\\('([^']*)'\\)");
+	private static Pattern valueErrorPattern = Pattern.compile("ValueError\\('([^']*)'\\)");
 
 	private final String baseUrl;
 
@@ -382,8 +382,8 @@ public class ChromaApi {
 		if (!StringUtils.hasText(logString)) {
 			return "";
 		}
-		Matcher m = VALUE_ERROR_PATTERN.matcher(logString);
-		return (m.find()) ? m.group(1) : "";
+		Matcher m = valueErrorPattern.matcher(logString);
+		return m.find() ? m.group(1) : "";
 	}
 
 }

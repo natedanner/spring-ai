@@ -92,7 +92,7 @@ public class XmlHelper {
 		Matcher matcher = FUNCTION_CALLS_PATTERN.matcher(text);
 
 		// Find and print the XML block
-		return (matcher.find()) ? matcher.group() : "";
+		return matcher.find() ? matcher.group() : "";
 	}
 
 	public static FunctionCalls extractFunctionCalls(String text) {
@@ -104,8 +104,7 @@ public class XmlHelper {
 		}
 
 		try {
-			FunctionCalls functionCalls = xmlMapper.readValue(xml, FunctionCalls.class);
-			return functionCalls;
+			return xmlMapper.readValue(xml, FunctionCalls.class);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

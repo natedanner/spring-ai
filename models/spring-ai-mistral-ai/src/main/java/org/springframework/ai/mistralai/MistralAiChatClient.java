@@ -148,7 +148,7 @@ public class MistralAiChatClient extends
 			// The rest of the chunks with same ID share the same role.
 			ConcurrentHashMap<String, String> roleMap = new ConcurrentHashMap<>();
 
-			return completionChunks.map(chunk -> toChatCompletion(chunk)).map(chatCompletion -> {
+			return completionChunks.map(this::toChatCompletion).map(chatCompletion -> {
 
 				chatCompletion = handleFunctionCallOrReturn(request, ResponseEntity.of(Optional.of(chatCompletion)))
 					.getBody();
@@ -160,7 +160,7 @@ public class MistralAiChatClient extends
 					if (choice.message().role() != null) {
 						roleMap.putIfAbsent(id, choice.message().role().name());
 					}
-					String finish = (choice.finishReason() != null ? choice.finishReason().name() : "");
+					String finish = choice.finishReason() != null ? choice.finishReason().name() : "";
 					var generation = new Generation(choice.message().content(),
 							Map.of("id", id, "role", roleMap.get(id), "finishReason", finish));
 					if (choice.finishReason() != null) {

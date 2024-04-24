@@ -84,7 +84,7 @@ public class GemFireVectorStoreIT {
 		contextRunner.run(context -> {
 			VectorStore vectorStore = context.getBean(VectorStore.class);
 			vectorStore.add(documents);
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 			Awaitility.await().atMost(1, MINUTES).until(() -> {
 				return vectorStore.similaritySearch(SearchRequest.query("Great Depression").withTopK(3));
 			}, hasSize(0));

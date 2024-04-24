@@ -114,7 +114,7 @@ public class PineconeVectorStore implements VectorStore {
 			return builder().build();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String apiKey;
 
@@ -318,7 +318,7 @@ public class PineconeVectorStore implements VectorStore {
 
 	public List<Document> similaritySearch(SearchRequest request, String namespace) {
 
-		String nativeExpressionFilters = (request.getFilterExpression() != null)
+		String nativeExpressionFilters = request.getFilterExpression() != null
 				? this.filterExpressionConverter.convertExpression(request.getFilterExpression()) : "";
 
 		List<Double> queryEmbedding = this.embeddingClient.embed(request.getQuery());
@@ -358,8 +358,7 @@ public class PineconeVectorStore implements VectorStore {
 		try {
 			var structBuilder = Struct.newBuilder();
 			JsonFormat.parser().ignoringUnknownFields().merge(metadataFilters, structBuilder);
-			var filterStruct = structBuilder.build();
-			return filterStruct;
+			return structBuilder.build();
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -389,7 +388,7 @@ public class PineconeVectorStore implements VectorStore {
 	 * @return The converted list of floats.
 	 */
 	private List<Float> toFloatList(List<Double> doubleList) {
-		return doubleList.stream().map(d -> d.floatValue()).toList();
+		return doubleList.stream().map(Double::floatValue).toList();
 	}
 
 }

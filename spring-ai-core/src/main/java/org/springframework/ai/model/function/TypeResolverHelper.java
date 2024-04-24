@@ -58,10 +58,8 @@ public class TypeResolverHelper {
 	}
 
 	public static Type getFunctionArgumentType(Type functionType, int argumentIndex) {
-		var argumentType = functionType instanceof ParameterizedType
+		return functionType instanceof ParameterizedType
 				? ((ParameterizedType) functionType).getActualTypeArguments()[argumentIndex] : Object.class;
-
-		return argumentType;
 	}
 
 	/**

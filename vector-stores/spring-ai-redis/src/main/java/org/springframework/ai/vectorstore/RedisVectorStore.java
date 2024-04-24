@@ -146,7 +146,7 @@ public class RedisVectorStore implements VectorStore, InitializingBean {
 			return builder().build();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String uri = DEFAULT_URI;
 
@@ -284,7 +284,7 @@ public class RedisVectorStore implements VectorStore, InitializingBean {
 
 	private final RedisVectorStoreConfig config;
 
-	private FilterExpressionConverter filterExpressionConverter;
+	private final FilterExpressionConverter filterExpressionConverter;
 
 	public RedisVectorStore(RedisVectorStoreConfig config, EmbeddingClient embeddingClient) {
 

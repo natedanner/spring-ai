@@ -75,7 +75,7 @@ public class MetadataTransformerIT {
 
 		var updatedDocuments = keywordMetadataEnricher.apply(List.of(document1, document2));
 
-		List<Map<String, Object>> keywords = updatedDocuments.stream().map(d -> d.getMetadata()).toList();
+		List<Map<String, Object>> keywords = updatedDocuments.stream().map(Document::getMetadata).toList();
 
 		assertThat(updatedDocuments.size()).isEqualTo(2);
 		var keywords1 = keywords.get(0);
@@ -92,7 +92,7 @@ public class MetadataTransformerIT {
 
 		var updatedDocuments = summaryMetadataEnricher.apply(List.of(document1, document2));
 
-		List<Map<String, Object>> summaries = updatedDocuments.stream().map(d -> d.getMetadata()).toList();
+		List<Map<String, Object>> summaries = updatedDocuments.stream().map(Document::getMetadata).toList();
 
 		assertThat(summaries.size()).isEqualTo(2);
 		var summary1 = summaries.get(0);
@@ -164,8 +164,7 @@ public class MetadataTransformerIT {
 
 		@Bean
 		public OpenAiChatClient openAiChatClient(OpenAiApi openAiApi) {
-			OpenAiChatClient openAiChatClient = new OpenAiChatClient(openAiApi);
-			return openAiChatClient;
+			return new OpenAiChatClient(openAiApi);
 		}
 
 		@Bean

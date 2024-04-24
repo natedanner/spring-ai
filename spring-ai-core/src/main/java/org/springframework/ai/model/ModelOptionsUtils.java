@@ -59,16 +59,16 @@ import org.springframework.util.CollectionUtils;
  */
 public final class ModelOptionsUtils {
 
-	public final static ObjectMapper OBJECT_MAPPER = new ObjectMapper()
+	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
 		.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
 		.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 		.registerModule(new JavaTimeModule());
 
-	private final static List<String> BEAN_MERGE_FIELD_EXCISIONS = List.of("class");
+	private static final List<String> BEAN_MERGE_FIELD_EXCISIONS = List.of("class");
 
-	private static ConcurrentHashMap<Class<?>, List<String>> REQUEST_FIELD_NAMES_PER_CLASS = new ConcurrentHashMap<Class<?>, List<String>>();
+	private static final ConcurrentHashMap<Class<?>, List<String>> REQUEST_FIELD_NAMES_PER_CLASS = new ConcurrentHashMap<>();
 
-	private static AtomicReference<SchemaGenerator> SCHEMA_GENERATOR_CACHE = new AtomicReference<>();
+	private static final AtomicReference<SchemaGenerator> SCHEMA_GENERATOR_CACHE = new AtomicReference<>();
 
 	private ModelOptionsUtils() {
 
@@ -88,7 +88,7 @@ public final class ModelOptionsUtils {
 		}
 	}
 
-	private static TypeReference<HashMap<String, Object>> MAP_TYPE_REF = new TypeReference<HashMap<String, Object>>() {
+	private static final TypeReference<HashMap<String, Object>> MAP_TYPE_REF = new TypeReference<>() {
 	};
 
 	/**
@@ -155,12 +155,12 @@ public final class ModelOptionsUtils {
 		targetMap.putAll(sourceMap.entrySet()
 			.stream()
 			.filter(e -> e.getValue() != null)
-			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
 		targetMap = targetMap.entrySet()
 			.stream()
 			.filter(e -> requestFieldNames.contains(e.getKey()))
-			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
 		return ModelOptionsUtils.mapToClass(targetMap, clazz);
 	}
@@ -197,7 +197,7 @@ public final class ModelOptionsUtils {
 				.entrySet()
 				.stream()
 				.filter(e -> e.getValue() != null)
-				.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		}
 		catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
@@ -301,7 +301,7 @@ public final class ModelOptionsUtils {
 		BeanWrapper sourceBeanWrap = new BeanWrapperImpl(source);
 		BeanWrapper targetBeanWrap = new BeanWrapperImpl(target);
 
-		List<String> interfaceNames = Arrays.stream(sourceInterfaceClazz.getMethods()).map(m -> m.getName()).toList();
+		List<String> interfaceNames = Arrays.stream(sourceInterfaceClazz.getMethods()).map(java.lang.reflect.Method::getName).toList();
 
 		for (PropertyDescriptor descriptor : sourceBeanWrap.getPropertyDescriptors()) {
 
@@ -380,7 +380,7 @@ public final class ModelOptionsUtils {
 						}
 					});
 				}
-				else if (value.isTextual() && entry.getKey().equals("type")) {
+				else if (value.isTextual() && "type".equals(entry.getKey())) {
 					String oldValue = ((ObjectNode) node).get("type").asText();
 					((ObjectNode) node).put("type", oldValue.toUpperCase());
 				}

@@ -56,10 +56,12 @@ public class Speech implements ModelResult<byte[]> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Speech that))
+		}
+		if (!(o instanceof Speech that)) {
 			return false;
+		}
 		return Arrays.equals(audio, that.audio) && Objects.equals(speechMetadata, that.speechMetadata);
 	}
 

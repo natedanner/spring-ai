@@ -112,14 +112,14 @@ public class ChromaVectorStore implements VectorStore, InitializingBean {
 	@Override
 	public List<Document> similaritySearch(SearchRequest request) {
 
-		String nativeFilterExpression = (request.getFilterExpression() != null)
+		String nativeFilterExpression = request.getFilterExpression() != null
 				? this.filterExpressionConverter.convertExpression(request.getFilterExpression()) : "";
 
 		String query = request.getQuery();
 		Assert.notNull(query, "Query string must not be null");
 
 		List<Double> embedding = this.embeddingClient.embed(query);
-		Map<String, Object> where = (StringUtils.hasText(nativeFilterExpression))
+		Map<String, Object> where = StringUtils.hasText(nativeFilterExpression)
 				? JsonUtils.jsonToMap(nativeFilterExpression) : Map.of();
 		var queryRequest = new ChromaApi.QueryRequest(JsonUtils.toFloatList(embedding), request.getTopK(), where);
 		var queryResponse = this.chromaApi.queryCollection(this.collectionId, queryRequest);

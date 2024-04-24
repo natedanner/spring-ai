@@ -77,7 +77,7 @@ public class AzureOpenAiChatClient
 
 	private static final String DEFAULT_DEPLOYMENT_NAME = "gpt-35-turbo";
 
-	private static final Float DEFAULT_TEMPERATURE = 0.7f;
+	private static final Float DEFAULT_TEMPERATURE = 0.7F;
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -165,7 +165,7 @@ public class AzureOpenAiChatClient
 			.map(ChatCompletions::getChoices)
 			.flatMap(List::stream)
 			.map(choice -> {
-				var content = (choice.getDelta() != null) ? choice.getDelta().getContent() : null;
+				var content = choice.getDelta() != null ? choice.getDelta().getContent() : null;
 				var generation = new Generation(content).withGenerationMetadata(generateChoiceMetadata(choice));
 				return new ChatResponse(List.of(generation));
 			}));
@@ -289,7 +289,7 @@ public class AzureOpenAiChatClient
 		mergedAzureOptions.setStream(azureOptions.isStream());
 
 		mergedAzureOptions.setMaxTokens(
-				(azureOptions.getMaxTokens() != null) ? azureOptions.getMaxTokens() : springAiOptions.getMaxTokens());
+				azureOptions.getMaxTokens() != null ? azureOptions.getMaxTokens() : springAiOptions.getMaxTokens());
 
 		mergedAzureOptions.setLogitBias(
 				azureOptions.getLogitBias() != null ? azureOptions.getLogitBias() : springAiOptions.getLogitBias());
@@ -350,19 +350,19 @@ public class AzureOpenAiChatClient
 			mergedAzureOptions.setStop(springAiOptions.getStop());
 		}
 
-		if (springAiOptions.getTemperature() != null && springAiOptions.getTemperature() != null) {
+		if (springAiOptions.getTemperature() != null) {
 			mergedAzureOptions.setTemperature(springAiOptions.getTemperature().doubleValue());
 		}
 
-		if (springAiOptions.getTopP() != null && springAiOptions.getTopP() != null) {
+		if (springAiOptions.getTopP() != null) {
 			mergedAzureOptions.setTopP(springAiOptions.getTopP().doubleValue());
 		}
 
-		if (springAiOptions.getFrequencyPenalty() != null && springAiOptions.getFrequencyPenalty() != null) {
+		if (springAiOptions.getFrequencyPenalty() != null) {
 			mergedAzureOptions.setFrequencyPenalty(springAiOptions.getFrequencyPenalty().doubleValue());
 		}
 
-		if (springAiOptions.getPresencePenalty() != null && springAiOptions.getPresencePenalty() != null) {
+		if (springAiOptions.getPresencePenalty() != null) {
 			mergedAzureOptions.setPresencePenalty(springAiOptions.getPresencePenalty().doubleValue());
 		}
 

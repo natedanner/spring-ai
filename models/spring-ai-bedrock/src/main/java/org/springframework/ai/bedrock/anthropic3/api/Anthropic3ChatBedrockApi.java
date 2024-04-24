@@ -156,7 +156,7 @@ public class Anthropic3ChatBedrockApi extends
 			return new Builder(messages);
 		}
 
-		public static class Builder {
+		public static final class Builder {
 			private final List<ChatCompletionMessage> messages;
 			private String system;
 			private Float temperature;// = 0.7f;

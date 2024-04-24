@@ -121,36 +121,41 @@ public abstract class AbstractMessage implements Message {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mediaData == null) ? 0 : mediaData.hashCode());
-		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
-		result = prime * result + ((messageType == null) ? 0 : messageType.hashCode());
+		result = prime * result + (mediaData == null ? 0 : mediaData.hashCode());
+		result = prime * result + (properties == null ? 0 : properties.hashCode());
+		result = prime * result + (messageType == null ? 0 : messageType.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		AbstractMessage other = (AbstractMessage) obj;
 		if (mediaData == null) {
-			if (other.mediaData != null)
+			if (other.mediaData != null) {
 				return false;
+			}
 		}
-		else if (!mediaData.equals(other.mediaData))
+		else if (!mediaData.equals(other.mediaData)) {
 			return false;
+		}
 		if (properties == null) {
-			if (other.properties != null)
+			if (other.properties != null) {
 				return false;
+			}
 		}
-		else if (!properties.equals(other.properties))
+		else if (!properties.equals(other.properties)) {
 			return false;
-		if (messageType != other.messageType)
-			return false;
-		return true;
+		}
+		return !(messageType != other.messageType);
 	}
 
 }

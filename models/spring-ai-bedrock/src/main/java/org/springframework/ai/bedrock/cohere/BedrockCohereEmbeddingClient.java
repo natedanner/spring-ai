@@ -120,7 +120,7 @@ public class BedrockCohereEmbeddingClient extends AbstractEmbeddingClient {
 	 */
 	BedrockCohereEmbeddingOptions mergeOptions(EmbeddingOptions requestOptions) {
 
-		BedrockCohereEmbeddingOptions options = (this.defaultOptions != null) ? this.defaultOptions
+		BedrockCohereEmbeddingOptions options = this.defaultOptions != null ? this.defaultOptions
 				: BedrockCohereEmbeddingOptions.builder()
 					.withInputType(CohereEmbeddingRequest.InputType.SEARCH_DOCUMENT)
 					.withTruncate(CohereEmbeddingRequest.Truncate.NONE)

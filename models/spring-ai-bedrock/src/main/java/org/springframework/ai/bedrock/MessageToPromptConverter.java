@@ -27,7 +27,7 @@ import org.springframework.ai.chat.messages.MessageType;
  * @author Christian Tzolov
  * @since 0.8.0
  */
-public class MessageToPromptConverter {
+public final class MessageToPromptConverter {
 
 	private static final String HUMAN_PROMPT = "Human:";
 
@@ -75,10 +75,8 @@ public class MessageToPromptConverter {
 			.collect(Collectors.joining(System.lineSeparator()));
 
 		// Related to: https://github.com/spring-projects/spring-ai/issues/404
-		final String prompt = systemMessages + this.lineSeparator + this.lineSeparator + userMessages
+		return systemMessages + this.lineSeparator + this.lineSeparator + userMessages
 				+ this.lineSeparator + ASSISTANT_PROMPT;
-
-		return prompt;
 	}
 
 	protected String messageToString(Message message) {

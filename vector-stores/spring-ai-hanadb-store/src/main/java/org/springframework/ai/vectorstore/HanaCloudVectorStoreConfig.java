@@ -19,7 +19,7 @@ package org.springframework.ai.vectorstore;
  * @author Rahul Mittal
  * @since 1.0.0
  */
-public class HanaCloudVectorStoreConfig {
+public final class HanaCloudVectorStoreConfig {
 
 	private String tableName;
 

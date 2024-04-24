@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
 /**
  * @author Christian Tzolov
  */
-public class DefaultContentFormatter implements ContentFormatter {
+public final class DefaultContentFormatter implements ContentFormatter {
 
 	private static final String TEMPLATE_CONTENT_PLACEHOLDER = "{content}";
 
@@ -45,7 +45,7 @@ public class DefaultContentFormatter implements ContentFormatter {
 
 	private static final String DEFAULT_METADATA_SEPARATOR = System.lineSeparator();
 
-	private static final String DEFAULT_TEXT_TEMPLATE = String.format("%s\n\n%s", TEMPLATE_METADATA_STRING_PLACEHOLDER,
+	private static final String DEFAULT_TEXT_TEMPLATE = String.format("%s%n%n%s", TEMPLATE_METADATA_STRING_PLACEHOLDER,
 			TEMPLATE_CONTENT_PLACEHOLDER);
 
 	/**
@@ -98,7 +98,7 @@ public class DefaultContentFormatter implements ContentFormatter {
 		this.excludedEmbedMetadataKeys = builder.excludedEmbedMetadataKeys;
 	}
 
-	public static class Builder {
+	public static final class Builder {
 
 		private String metadataTemplate = DEFAULT_METADATA_TEMPLATE;
 
@@ -222,10 +222,10 @@ public class DefaultContentFormatter implements ContentFormatter {
 	protected Map<String, Object> metadataFilter(Map<String, Object> metadata, MetadataMode metadataMode) {
 
 		if (metadataMode == MetadataMode.ALL) {
-			return new HashMap<String, Object>(metadata);
+			return new HashMap<>(metadata);
 		}
 		if (metadataMode == MetadataMode.NONE) {
-			return new HashMap<String, Object>(Collections.emptyMap());
+			return new HashMap<>(Collections.emptyMap());
 		}
 
 		Set<String> usableMetadataKeys = new HashSet<>(metadata.keySet());
@@ -237,10 +237,10 @@ public class DefaultContentFormatter implements ContentFormatter {
 			usableMetadataKeys.removeAll(this.excludedEmbedMetadataKeys);
 		}
 
-		return new HashMap<String, Object>(metadata.entrySet()
+		return new HashMap<>(metadata.entrySet()
 			.stream()
 			.filter(e -> usableMetadataKeys.contains(e.getKey()))
-			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 	}
 
 	public String getMetadataTemplate() {

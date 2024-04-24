@@ -172,7 +172,7 @@ class CassandraRichSchemaVectorStoreIT {
 						CassandraVectorStore.SIMILARITY_FIELD_NAME);
 
 				// Remove all documents from the createStore
-				store.delete(documents.stream().map(doc -> doc.getId()).toList());
+				store.delete(documents.stream().map(Document::getId).toList());
 
 				results = store.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 				assertThat(results).isEmpty();
@@ -526,19 +526,19 @@ class CassandraRichSchemaVectorStoreIT {
 			List<SchemaColumn> columnOverrides) throws IOException {
 
 		Optional<SchemaColumn> wikiOverride = columnOverrides.stream()
-			.filter((f) -> "wiki".equals(f.name()))
+			.filter(f -> "wiki".equals(f.name()))
 			.findFirst();
 
 		Optional<SchemaColumn> langOverride = columnOverrides.stream()
-			.filter((f) -> "language".equals(f.name()))
+			.filter(f -> "language".equals(f.name()))
 			.findFirst();
 
 		Optional<SchemaColumn> titleOverride = columnOverrides.stream()
-			.filter((f) -> "title".equals(f.name()))
+			.filter(f -> "title".equals(f.name()))
 			.findFirst();
 
 		Optional<SchemaColumn> chunkNoOverride = columnOverrides.stream()
-			.filter((f) -> "chunk_no".equals(f.name()))
+			.filter(f -> "chunk_no".equals(f.name()))
 			.findFirst();
 
 		SchemaColumn wikiSC = wikiOverride.orElse(new SchemaColumn("wiki", DataTypes.TEXT));
@@ -549,7 +549,7 @@ class CassandraRichSchemaVectorStoreIT {
 		List<SchemaColumn> partitionKeys = List.of(wikiSC, langSC, titleSC);
 		List<SchemaColumn> clusteringKeys = List.of(chunkNoSC);
 
-		CassandraVectorStoreConfig.Builder builder = CassandraVectorStoreConfig.builder()
+		return CassandraVectorStoreConfig.builder()
 			.withCqlSession(context.getBean(CqlSession.class))
 			.withKeyspaceName("test_wikidata")
 			.withTableName("articles")
@@ -570,14 +570,12 @@ class CassandraRichSchemaVectorStoreIT {
 				}
 				return format("%s§¶%s", primaryKeys.get(2), primaryKeys.get(3));
 			})
-			.withDocumentIdTranslator((id) -> {
+			.withDocumentIdTranslator(id -> {
 				String[] parts = id.split("§¶");
 				String title = parts[0];
-				int chunk_no = 0 < parts.length ? Integer.parseInt(parts[1]) : 0;
-				return List.of("simplewiki", "en", title, chunk_no);
+				int chunkNo = 0 < parts.length ? Integer.parseInt(parts[1]) : 0;
+				return List.of("simplewiki", "en", title, chunkNo);
 			});
-
-		return builder;
 	}
 
 	private void executeCqlFile(ApplicationContext context, String filename) throws IOException {

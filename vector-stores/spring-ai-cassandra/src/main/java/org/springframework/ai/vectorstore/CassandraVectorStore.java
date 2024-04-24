@@ -99,7 +99,7 @@ public final class CassandraVectorStore implements VectorStore, InitializingBean
 	 */
 	public enum Similarity {
 
-		COSINE, DOT_PRODUCT, EUCLIDEAN;
+		COSINE, DOT_PRODUCT, EUCLIDEAN
 
 	}
 
@@ -177,7 +177,7 @@ public final class CassandraVectorStore implements VectorStore, InitializingBean
 
 				for (var metadataColumn : this.conf.schema.metadataColumns()
 					.stream()
-					.filter((mc) -> d.getMetadata().containsKey(mc.name()))
+					.filter(mc -> d.getMetadata().containsKey(mc.name()))
 					.toList()) {
 
 					builder = builder.set(metadataColumn.name(), d.getMetadata().get(metadataColumn.name()),
@@ -282,11 +282,11 @@ public final class CassandraVectorStore implements VectorStore, InitializingBean
 		// metadata fields that are not configured as metadata columns are not added
 		Set<String> fieldsThatAreColumns = new HashSet<>(this.conf.schema.metadataColumns()
 			.stream()
-			.map((mc) -> mc.name())
-			.filter((mc) -> metadataFields.contains(mc))
+			.map(CassandraVectorStoreConfig.SchemaColumn::name)
+			.filter(metadataFields::contains)
 			.toList());
 
-		return this.addStmts.computeIfAbsent(fieldsThatAreColumns, (fields) -> {
+		return this.addStmts.computeIfAbsent(fieldsThatAreColumns, fields -> {
 
 			RegularInsert stmt = null;
 			InsertInto stmtStart = QueryBuilder.insertInto(this.conf.schema.keyspace(), this.conf.schema.table());
@@ -318,11 +318,7 @@ public final class CassandraVectorStore implements VectorStore, InitializingBean
 		}
 		ids.deleteCharAt(ids.length() - 1);
 
-		String similarityFunction = new StringBuilder("similarity_").append(this.similarity.toString().toLowerCase())
-			.append('(')
-			.append(conf.schema.embedding())
-			.append(",?)")
-			.toString();
+		String similarityFunction = "similarity_" + this.similarity.toString().toLowerCase() + '(' + conf.schema.embedding() + ",?)";
 
 		StringBuilder extraSelectFields = new StringBuilder();
 		for (var m : this.conf.schema.metadataColumns()) {

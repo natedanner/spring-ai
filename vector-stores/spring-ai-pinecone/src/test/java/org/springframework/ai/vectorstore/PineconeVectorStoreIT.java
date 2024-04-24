@@ -109,7 +109,7 @@ public class PineconeVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKey("distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			Awaitility.await().until(() -> {
 				return vectorStore.similaritySearch(SearchRequest.query("Hello").withTopK(1));
@@ -163,7 +163,7 @@ public class PineconeVectorStoreIT {
 			assertThat(results.get(0).getId()).isEqualTo(bgDocument.getId());
 
 			// Remove all documents from the store
-			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(Document::getId).toList());
 
 			Awaitility.await().until(() -> {
 				return vectorStore.similaritySearch(searchRequest.withTopK(1));
@@ -263,7 +263,7 @@ public class PineconeVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKey("distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 			Awaitility.await().until(() -> {
 				return vectorStore.similaritySearch(SearchRequest.query("Hello").withTopK(1));
 			}, hasSize(0));

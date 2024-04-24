@@ -77,7 +77,7 @@ public class FileDocumentWriter implements DocumentWriter {
 			int index = 0;
 			for (Document doc : docs) {
 				if (this.withDocumentMarkers) {
-					writer.write(String.format("%n### Doc: %s, pages:[%s,%s]\n", index,
+					writer.write(String.format("%n### Doc: %s, pages:[%s,%s]%n", index,
 							doc.getMetadata().get(METADATA_START_PAGE_NUMBER),
 							doc.getMetadata().get(METADATA_END_PAGE_NUMBER)));
 				}

@@ -81,7 +81,7 @@ public class QdrantVectorStoreAutoConfigurationIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("depression", "distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 			results = vectorStore.similaritySearch(SearchRequest.query("Great Depression").withTopK(1));
 			assertThat(results).hasSize(0);
 		});

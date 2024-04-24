@@ -39,14 +39,12 @@ public class OpenAiAudioTranscriptionResponseMetadata implements ResponseMetadat
 
 	public static OpenAiAudioTranscriptionResponseMetadata from(OpenAiAudioApi.StructuredResponse result) {
 		Assert.notNull(result, "OpenAI Transcription must not be null");
-		OpenAiAudioTranscriptionResponseMetadata transcriptionResponseMetadata = new OpenAiAudioTranscriptionResponseMetadata();
-		return transcriptionResponseMetadata;
+		return new OpenAiAudioTranscriptionResponseMetadata();
 	}
 
 	public static OpenAiAudioTranscriptionResponseMetadata from(String result) {
 		Assert.notNull(result, "OpenAI Transcription must not be null");
-		OpenAiAudioTranscriptionResponseMetadata transcriptionResponseMetadata = new OpenAiAudioTranscriptionResponseMetadata();
-		return transcriptionResponseMetadata;
+		return new OpenAiAudioTranscriptionResponseMetadata();
 	}
 
 	@Nullable

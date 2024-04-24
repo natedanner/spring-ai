@@ -56,11 +56,11 @@ public class ONNXSample {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String TOKENIZER_URI = "classpath:/onnx/tokenizer.json";
-		String MODEL_URI = "classpath:/onnx/generative.onnx";
+		String tokenizerUri = "classpath:/onnx/tokenizer.json";
+		String modelUri = "classpath:/onnx/generative.onnx";
 
-		var tokenizerResource = new DefaultResourceLoader().getResource(TOKENIZER_URI);
-		var modelResource = new DefaultResourceLoader().getResource(MODEL_URI);
+		var tokenizerResource = new DefaultResourceLoader().getResource(tokenizerUri);
+		var modelResource = new DefaultResourceLoader().getResource(modelUri);
 
 		String[] sentences = new String[] { "Hello world" };
 
@@ -68,23 +68,23 @@ public class ONNXSample {
 		HuggingFaceTokenizer tokenizer = HuggingFaceTokenizer.newInstance(tokenizerResource.getInputStream(), Map.of());
 		Encoding[] encodings = tokenizer.batchEncode(sentences);
 
-		long[][] input_ids0 = new long[encodings.length][];
-		long[][] attention_mask0 = new long[encodings.length][];
-		long[][] token_type_ids0 = new long[encodings.length][];
+		long[][] inputIds0 = new long[encodings.length][];
+		long[][] attentionMask0 = new long[encodings.length][];
+		long[][] tokenTypeIds0 = new long[encodings.length][];
 
 		for (int i = 0; i < encodings.length; i++) {
-			input_ids0[i] = encodings[i].getIds();
-			attention_mask0[i] = encodings[i].getAttentionMask();
-			token_type_ids0[i] = encodings[i].getTypeIds();
+			inputIds0[i] = encodings[i].getIds();
+			attentionMask0[i] = encodings[i].getAttentionMask();
+			tokenTypeIds0[i] = encodings[i].getTypeIds();
 		}
 
 		// https://onnxruntime.ai/docs/get-started/with-java.html
 		OrtEnvironment environment = OrtEnvironment.getEnvironment();
 		OrtSession session = environment.createSession(modelResource.getContentAsByteArray());
 
-		OnnxTensor inputIds = OnnxTensor.createTensor(environment, input_ids0);
-		OnnxTensor attentionMask = OnnxTensor.createTensor(environment, attention_mask0);
-		OnnxTensor tokenTypeIds = OnnxTensor.createTensor(environment, token_type_ids0);
+		OnnxTensor inputIds = OnnxTensor.createTensor(environment, inputIds0);
+		OnnxTensor attentionMask = OnnxTensor.createTensor(environment, attentionMask0);
+		OnnxTensor tokenTypeIds = OnnxTensor.createTensor(environment, tokenTypeIds0);
 
 		Map<String, OnnxTensor> inputs = new HashMap<>();
 		inputs.put("input_ids", inputIds);
@@ -104,7 +104,7 @@ public class ONNXSample {
 
 			try (NDManager manager = NDManager.newBaseManager()) {
 				NDArray ndTokenEmbeddings = create(tokenEmbeddings, manager);
-				NDArray ndAttentionMask = manager.create(attention_mask0);
+				NDArray ndAttentionMask = manager.create(attentionMask0);
 				System.out.println(ndTokenEmbeddings);
 
 				var embedding = meanPooling(ndTokenEmbeddings, ndAttentionMask);

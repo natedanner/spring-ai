@@ -82,7 +82,7 @@ public class MistralAiEmbeddingClient extends AbstractEmbeddingClient {
 	public EmbeddingResponse call(EmbeddingRequest request) {
 		return this.retryTemplate.execute(ctx -> {
 
-			var apiRequest = (this.defaultOptions != null)
+			var apiRequest = this.defaultOptions != null
 					? new MistralAiApi.EmbeddingRequest<>(request.getInstructions(), this.defaultOptions.getModel(),
 							this.defaultOptions.getEncodingFormat())
 					: new MistralAiApi.EmbeddingRequest<>(request.getInstructions(),

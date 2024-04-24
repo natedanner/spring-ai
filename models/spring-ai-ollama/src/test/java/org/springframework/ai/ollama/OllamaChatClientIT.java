@@ -58,7 +58,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Disabled("For manual smoke testing only.")
 class OllamaChatClientIT {
 
-	private static String MODEL = "mistral";
+	private static String model = "mistral";
 
 	private static final Log logger = LogFactory.getLog(OllamaChatClientIT.class);
 
@@ -69,9 +69,9 @@ class OllamaChatClientIT {
 
 	@BeforeAll
 	public static void beforeAll() throws IOException, InterruptedException {
-		logger.info("Start pulling the '" + MODEL + " ' generative ... would take several minutes ...");
-		ollamaContainer.execInContainer("ollama", "pull", MODEL);
-		logger.info(MODEL + " pulling competed!");
+		logger.info("Start pulling the '" + model + " ' generative ... would take several minutes ...");
+		ollamaContainer.execInContainer("ollama", "pull", model);
+		logger.info(model + " pulling competed!");
 
 		baseUrl = "http://" + ollamaContainer.getHost() + ":" + ollamaContainer.getMappedPort(11434);
 	}
@@ -220,8 +220,8 @@ class OllamaChatClientIT {
 
 		@Bean
 		public OllamaChatClient ollamaChat(OllamaApi ollamaApi) {
-			return new OllamaChatClient(ollamaApi).withModel(MODEL)
-				.withDefaultOptions(OllamaOptions.create().withModel(MODEL).withTemperature(0.9f));
+			return new OllamaChatClient(ollamaApi).withModel(model)
+				.withDefaultOptions(OllamaOptions.create().withModel(model).withTemperature(0.9f));
 		}
 
 	}

@@ -193,7 +193,7 @@ public class SimpleVectorStore implements VectorStore {
 
 	}
 
-	public class EmbeddingMath {
+	public final class EmbeddingMath {
 
 		private EmbeddingMath() {
 			throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");

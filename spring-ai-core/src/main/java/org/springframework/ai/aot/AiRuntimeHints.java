@@ -67,8 +67,9 @@ public class AiRuntimeHints {
 			.stream()//
 			.map(bd -> TypeReference.of(Objects.requireNonNull(bd.getBeanClassName())))//
 			.peek(tr -> {
-				if (log.isDebugEnabled())
+				if (log.isDebugEnabled()) {
 					log.debug("registering [" + tr.getName() + ']');
+				}
 			})
 			.collect(Collectors.toUnmodifiableSet());
 	}

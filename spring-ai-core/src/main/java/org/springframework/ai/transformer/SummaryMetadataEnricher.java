@@ -55,7 +55,7 @@ public class SummaryMetadataEnricher implements DocumentTransformer {
 
 	public enum SummaryType {
 
-		PREVIOUS, CURRENT, NEXT;
+		PREVIOUS, CURRENT, NEXT
 
 	}
 

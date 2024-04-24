@@ -110,7 +110,7 @@ public class OllamaChatClient implements ChatClient, StreamingChatClient {
 		Flux<OllamaApi.ChatResponse> response = this.chatApi.streamingChat(ollamaChatRequest(prompt, true));
 
 		return response.map(chunk -> {
-			Generation generation = (chunk.message() != null) ? new Generation(chunk.message().content())
+			Generation generation = chunk.message() != null ? new Generation(chunk.message().content())
 					: new Generation("");
 			if (Boolean.TRUE.equals(chunk.done())) {
 				generation = generation.withGenerationMetadata(ChatGenerationMetadata.from("unknown", null));

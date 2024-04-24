@@ -15,7 +15,7 @@
  */
 package org.springframework.ai.image;
 
-public class ImageOptionsBuilder {
+public final class ImageOptionsBuilder {
 
 	private class ImageModelOptionsImpl implements ImageOptions {
 

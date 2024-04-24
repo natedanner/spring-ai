@@ -59,9 +59,9 @@ public class MistralAiRetryTests {
 
 	private class TestRetryListener implements RetryListener {
 
-		int onErrorRetryCount = 0;
+		int onErrorRetryCount;
 
-		int onSuccessRetryCount = 0;
+		int onSuccessRetryCount;
 
 		@Override
 		public <T, E extends Throwable> void onSuccess(RetryContext context, RetryCallback<T, E> callback, T result) {

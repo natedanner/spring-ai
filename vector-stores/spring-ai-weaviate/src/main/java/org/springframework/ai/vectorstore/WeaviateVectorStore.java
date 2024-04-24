@@ -33,6 +33,7 @@ import io.weaviate.client.base.WeaviateErrorMessage;
 import io.weaviate.client.v1.auth.exception.AuthException;
 import io.weaviate.client.v1.batch.model.BatchDeleteResponse;
 import io.weaviate.client.v1.batch.model.ObjectGetResponse;
+import io.weaviate.client.v1.batch.model.ObjectsGetResponseAO2Result;
 import io.weaviate.client.v1.data.model.WeaviateObject;
 import io.weaviate.client.v1.filters.Operator;
 import io.weaviate.client.v1.filters.WhereFilter;
@@ -223,7 +224,7 @@ public class WeaviateVectorStore implements VectorStore, InitializingBean {
 			return builder().build();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String apiKey = "";
 
@@ -399,7 +400,7 @@ public class WeaviateVectorStore implements VectorStore, InitializingBean {
 			errorMessages.add(response.getError()
 				.getMessages()
 				.stream()
-				.map(wm -> wm.getMessage())
+				.map(WeaviateErrorMessage::getMessage)
 				.collect(Collectors.joining(System.lineSeparator())));
 			throw new RuntimeException("Failed to add documents because: \n" + errorMessages);
 		}
@@ -410,7 +411,7 @@ public class WeaviateVectorStore implements VectorStore, InitializingBean {
 					var error = r.getResult().getErrors();
 					errorMessages.add(error.getError()
 						.stream()
-						.map(e -> e.getMessage())
+						.map(ObjectsGetResponseAO2Result.ErrorItem::getMessage)
 						.collect(Collectors.joining(System.lineSeparator())));
 				}
 			}
@@ -473,7 +474,7 @@ public class WeaviateVectorStore implements VectorStore, InitializingBean {
 			String errorMessages = result.getError()
 				.getMessages()
 				.stream()
-				.map(wm -> wm.getMessage())
+				.map(WeaviateErrorMessage::getMessage)
 				.collect(Collectors.joining(","));
 			throw new RuntimeException("Failed to delete documents because: \n" + errorMessages);
 		}

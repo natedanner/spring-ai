@@ -28,7 +28,7 @@ public class ApiUtils {
 	public static final String DEFAULT_BASE_URL = "https://api.openai.com";
 
 	public static Consumer<HttpHeaders> getJsonContentHeaders(String apiKey) {
-		return (headers) -> {
+		return headers -> {
 			headers.setBearerAuth(apiKey);
 			headers.setContentType(MediaType.APPLICATION_JSON);
 		};

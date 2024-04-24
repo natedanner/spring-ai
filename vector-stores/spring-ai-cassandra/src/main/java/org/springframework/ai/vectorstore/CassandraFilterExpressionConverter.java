@@ -45,7 +45,7 @@ final class CassandraFilterExpressionConverter extends AbstractFilterExpressionC
 	public CassandraFilterExpressionConverter(Collection<ColumnMetadata> columns) {
 
 		this.columnsByName = columns.stream()
-			.collect(Collectors.toMap((c) -> c.getName().asInternal(), Function.identity()));
+			.collect(Collectors.toMap(c -> c.getName().asInternal(), Function.identity()));
 	}
 
 	@Override

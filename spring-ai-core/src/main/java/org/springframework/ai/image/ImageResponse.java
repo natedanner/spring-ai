@@ -58,10 +58,12 @@ public class ImageResponse implements ModelResponse<ImageGeneration> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ImageResponse that))
+		}
+		if (!(o instanceof ImageResponse that)) {
 			return false;
+		}
 		return Objects.equals(imageResponseMetadata, that.imageResponseMetadata)
 				&& Objects.equals(imageGenerations, that.imageGenerations);
 	}

@@ -105,7 +105,7 @@ public class MilvusVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("meta1", "distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			results = vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 			assertThat(results).hasSize(0);

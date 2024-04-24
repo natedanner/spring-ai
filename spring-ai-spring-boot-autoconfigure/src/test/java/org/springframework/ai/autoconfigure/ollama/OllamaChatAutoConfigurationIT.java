@@ -59,9 +59,9 @@ public class OllamaChatAutoConfigurationIT {
 
 	private static final Log logger = LogFactory.getLog(OllamaChatAutoConfigurationIT.class);
 
-	private static String MODEL_NAME = "mistral";
+	private static String modelName = "mistral";
 
-	private static final String OLLAMA_WITH_MODEL = "%s-%s".formatted(MODEL_NAME, OllamaImage.IMAGE);
+	private static final String OLLAMA_WITH_MODEL = "%s-%s".formatted(modelName, OllamaImage.IMAGE);
 
 	private static final OllamaContainer ollamaContainer;
 
@@ -75,9 +75,9 @@ public class OllamaChatAutoConfigurationIT {
 
 	@BeforeAll
 	public static void beforeAll() throws IOException, InterruptedException {
-		logger.info("Start pulling the '" + MODEL_NAME + " ' generative ... would take several minutes ...");
-		ollamaContainer.execInContainer("ollama", "pull", MODEL_NAME);
-		logger.info(MODEL_NAME + " pulling competed!");
+		logger.info("Start pulling the '" + modelName + " ' generative ... would take several minutes ...");
+		ollamaContainer.execInContainer("ollama", "pull", modelName);
+		logger.info(modelName + " pulling competed!");
 
 		baseUrl = "http://" + ollamaContainer.getHost() + ":" + ollamaContainer.getMappedPort(11434);
 	}
@@ -85,7 +85,7 @@ public class OllamaChatAutoConfigurationIT {
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner().withPropertyValues(
 	// @formatter:off
 				"spring.ai.ollama.baseUrl=" + baseUrl,
-				"spring.ai.ollama.chat.options.model=" + MODEL_NAME,
+				"spring.ai.ollama.chat.options.model=" + modelName,
 				"spring.ai.ollama.chat.options.temperature=0.5",
 				"spring.ai.ollama.chat.options.topK=10")
 				// @formatter:on
@@ -158,14 +158,14 @@ public class OllamaChatAutoConfigurationIT {
 			super(image);
 			this.dockerImageName = image;
 			withExposedPorts(11434);
-			withImagePullPolicy(dockerImageName -> !dockerImageName.getUnversionedPart().startsWith(MODEL_NAME));
+			withImagePullPolicy(dockerImageName -> !dockerImageName.getUnversionedPart().startsWith(modelName));
 		}
 
 		@Override
 		protected void containerIsStarted(InspectContainerResponse containerInfo) {
-			if (!this.dockerImageName.getVersionPart().endsWith(MODEL_NAME)) {
+			if (!this.dockerImageName.getVersionPart().endsWith(modelName)) {
 				try {
-					execInContainer("ollama", "pull", MODEL_NAME);
+					execInContainer("ollama", "pull", modelName);
 				}
 				catch (IOException | InterruptedException e) {
 					throw new RuntimeException("Error pulling orca-mini model", e);

@@ -33,7 +33,7 @@ public class BedrockTitanEmbeddingProperties {
 	/**
 	 * Enable Bedrock Titan Embedding Client. False by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * Bedrock Titan Embedding generative name. Defaults to 'amazon.titan-embed-image-v1'.

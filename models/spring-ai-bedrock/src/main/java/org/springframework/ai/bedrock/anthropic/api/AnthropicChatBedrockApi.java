@@ -149,7 +149,7 @@ public class AnthropicChatBedrockApi extends
 			return new Builder(prompt);
 		}
 
-		public static class Builder {
+		public static final class Builder {
 			private final String prompt;
 			private Float temperature;// = 0.7f;
 			private Integer maxTokensToSample;// = 500;

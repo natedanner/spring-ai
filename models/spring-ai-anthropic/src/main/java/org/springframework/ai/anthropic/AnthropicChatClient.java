@@ -42,6 +42,7 @@ import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.StreamingChatClient;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.metadata.ChatGenerationMetadata;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -71,7 +72,7 @@ public class AnthropicChatClient extends
 
 	public static final Integer DEFAULT_MAX_TOKENS = 500;
 
-	public static final Float DEFAULT_TEMPERATURE = 0.8f;
+	public static final Float DEFAULT_TEMPERATURE = 0.8F;
 
 	/**
 	 * The lower-level API for the Anthropic service.
@@ -167,7 +168,7 @@ public class AnthropicChatClient extends
 
 		return response.map(chunk -> {
 
-			if (chunk.type().equals("message_start")) {
+			if ("message_start".equals(chunk.type())) {
 				chatCompletionReference.set(new ChatCompletionBuilder());
 				chatCompletionReference.get()
 					.withType(chunk.type())
@@ -177,17 +178,17 @@ public class AnthropicChatClient extends
 					.withUsage(chunk.message().usage())
 					.withContent(new ArrayList<>());
 			}
-			else if (chunk.type().equals("content_block_start")) {
+			else if ("content_block_start".equals(chunk.type())) {
 				var content = new MediaContent(chunk.contentBlock().type(), null, chunk.contentBlock().text(),
 						chunk.index());
 				chatCompletionReference.get().withType(chunk.type()).withContent(List.of(content));
 			}
-			else if (chunk.type().equals("content_block_delta")) {
+			else if ("content_block_delta".equals(chunk.type())) {
 				var content = new MediaContent(Type.TEXT_DELTA, null, (String) chunk.delta().get("text"),
 						chunk.index());
 				chatCompletionReference.get().withType(chunk.type()).withContent(List.of(content));
 			}
-			else if (chunk.type().equals("message_delta")) {
+			else if ("message_delta".equals(chunk.type())) {
 
 				ChatCompletion delta = ModelOptionsUtils.mapToClass(chunk.delta(), ChatCompletion.class);
 
@@ -228,10 +229,8 @@ public class AnthropicChatClient extends
 			return new ChatResponse(List.of());
 		}
 
-		List<Generation> generations = chatCompletion.content().stream().map(content -> {
-			return new Generation(content.text(), Map.of())
-				.withGenerationMetadata(ChatGenerationMetadata.from(chatCompletion.stopReason(), null));
-		}).toList();
+		List<Generation> generations = chatCompletion.content().stream().map(content -> new Generation(content.text(), Map.of())
+				.withGenerationMetadata(ChatGenerationMetadata.from(chatCompletion.stopReason(), null))).toList();
 
 		return new ChatResponse(generations, AnthropicChatResponseMetadata.from(chatCompletion));
 	}
@@ -273,7 +272,7 @@ public class AnthropicChatClient extends
 		String systemPrompt = prompt.getInstructions()
 			.stream()
 			.filter(m -> m.getMessageType() == MessageType.SYSTEM)
-			.map(m -> m.getContent())
+			.map(Message::getContent)
 			.collect(Collectors.joining(System.lineSeparator()));
 
 		ChatCompletionRequest request = new ChatCompletionRequest(this.defaultOptions.getModel(), userMessages,

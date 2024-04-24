@@ -49,7 +49,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(VertexAiPaLm2ApiTests.Config.class)
 public class VertexAiPaLm2ApiTests {
 
-	private final static String TEST_API_KEY = "test-api-key";
+	private static final String TEST_API_KEY = "test-api-key";
 
 	@Autowired
 	private VertexAiPaLm2Api client;

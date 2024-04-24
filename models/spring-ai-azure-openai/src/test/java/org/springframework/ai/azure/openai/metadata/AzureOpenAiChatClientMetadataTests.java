@@ -189,12 +189,10 @@ class AzureOpenAiChatClientMetadataTests {
 
 			String json = getJson();
 
-			ResponseEntity<?> response = ResponseEntity.status(HttpStatusCode.valueOf(200))
+			return ResponseEntity.status(HttpStatusCode.valueOf(200))
 				.contentType(MediaType.APPLICATION_JSON)
 				.contentLength(json.getBytes(StandardCharsets.UTF_8).length)
 				.body(getJson());
-
-			return response;
 		}
 
 		private String getJson() {

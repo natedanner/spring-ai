@@ -29,7 +29,7 @@ import java.util.Objects;
  */
 public class AudioTranscription implements ModelResult<String> {
 
-	private String text;
+	private final String text;
 
 	private OpenAiAudioTranscriptionMetadata transcriptionMetadata;
 
@@ -55,10 +55,12 @@ public class AudioTranscription implements ModelResult<String> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof AudioTranscription that))
+		}
+		if (!(o instanceof AudioTranscription that)) {
 			return false;
+		}
 		return Objects.equals(text, that.text) && Objects.equals(transcriptionMetadata, that.transcriptionMetadata);
 	}
 

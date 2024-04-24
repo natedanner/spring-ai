@@ -68,7 +68,7 @@ public class AnthropicApiIT {
 		List<StreamResponse> bla = response.collectList().block();
 		assertThat(bla).isNotNull();
 
-		bla.stream().forEach(r -> System.out.println(r));
+		bla.stream().forEach(System.out::println);
 	}
 
 }

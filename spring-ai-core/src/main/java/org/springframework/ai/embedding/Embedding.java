@@ -25,9 +25,9 @@ import org.springframework.ai.model.ModelResult;
  */
 public class Embedding implements ModelResult<List<Double>> {
 
-	private List<Double> embedding;
+	private final List<Double> embedding;
 
-	private Integer index;
+	private final Integer index;
 
 	private EmbeddingResultMetadata metadata;
 
@@ -65,10 +65,12 @@ public class Embedding implements ModelResult<List<Double>> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		Embedding embedding1 = (Embedding) o;
 		return Objects.equals(embedding, embedding1.embedding) && Objects.equals(index, embedding1.index);
 	}

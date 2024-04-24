@@ -106,13 +106,13 @@ class PaymentStatusBeanOpenAiIT {
 		@Bean
 		@Description("Get payment status of a transaction")
 		public Function<Transaction, Status> retrievePaymentStatus() {
-			return (transaction) -> new Status(DATA.get(transaction.transactionId).status());
+			return transaction -> new Status(DATA.get(transaction.transactionId).status());
 		}
 
 		@Bean
 		@Description("Get payment date of a transaction")
 		public Function<Transaction, Date> retrievePaymentDate() {
-			return (transaction) -> new Date(DATA.get(transaction.transactionId).date());
+			return transaction -> new Date(DATA.get(transaction.transactionId).date());
 		}
 
 	}

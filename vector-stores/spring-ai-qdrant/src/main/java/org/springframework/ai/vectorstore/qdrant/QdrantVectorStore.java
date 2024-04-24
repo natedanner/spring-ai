@@ -109,7 +109,7 @@ public class QdrantVectorStore implements VectorStore, InitializingBean {
 			return builder().build();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String collectionName;
 
@@ -117,9 +117,9 @@ public class QdrantVectorStore implements VectorStore, InitializingBean {
 
 			private int port = 6334;
 
-			private boolean useTls = false;
+			private boolean useTls;
 
-			private String apiKey = null;
+			private String apiKey;
 
 			private Builder() {
 			}
@@ -257,7 +257,7 @@ public class QdrantVectorStore implements VectorStore, InitializingBean {
 	@Override
 	public List<Document> similaritySearch(SearchRequest request) {
 		try {
-			Filter filter = (request.getFilterExpression() != null)
+			Filter filter = request.getFilterExpression() != null
 					? this.filterExpressionConverter.convertExpression(request.getFilterExpression())
 					: Filter.getDefaultInstance();
 
@@ -274,9 +274,7 @@ public class QdrantVectorStore implements VectorStore, InitializingBean {
 
 			var queryResponse = this.qdrantClient.searchAsync(searchPoints).get();
 
-			return queryResponse.stream().map(scoredPoint -> {
-				return toDocument(scoredPoint);
-			}).toList();
+			return queryResponse.stream().map(this::toDocument).toList();
 
 		}
 		catch (InterruptedException | ExecutionException | IllegalArgumentException e) {
@@ -327,7 +325,7 @@ public class QdrantVectorStore implements VectorStore, InitializingBean {
 	 * @return The converted list of floats.
 	 */
 	private List<Float> toFloatList(List<Double> doubleList) {
-		return doubleList.stream().map(d -> d.floatValue()).toList();
+		return doubleList.stream().map(Double::floatValue).toList();
 	}
 
 	@Override

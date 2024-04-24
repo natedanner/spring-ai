@@ -141,10 +141,8 @@ public class OpenAiApiToolFunctionCallIT {
 				.containsAnyOf("30.0°C", "30°C");
 			assertThat(chatCompletion2.getBody().choices().get(0).message().content()).contains("Tokyo")
 				.containsAnyOf("10.0°C", "10°C");
-			;
 			assertThat(chatCompletion2.getBody().choices().get(0).message().content()).contains("Paris")
 				.containsAnyOf("15.0°C", "15°C");
-			;
 		}
 
 	}

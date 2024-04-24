@@ -78,8 +78,8 @@ public class TokenTextSplitter extends TextSplitter {
 
 		List<Integer> tokens = getEncodedTokens(text);
 		List<String> chunks = new ArrayList<>();
-		int num_chunks = 0;
-		while (!tokens.isEmpty() && num_chunks < this.maxNumChunks) {
+		int numChunks = 0;
+		while (!tokens.isEmpty() && numChunks < this.maxNumChunks) {
 			List<Integer> chunk = tokens.subList(0, Math.min(chunkSize, tokens.size()));
 			String chunkText = decodeTokens(chunk);
 
@@ -98,7 +98,7 @@ public class TokenTextSplitter extends TextSplitter {
 				chunkText = chunkText.substring(0, lastPunctuation + 1);
 			}
 
-			String chunkTextToAppend = (this.keepSeparator) ? chunkText.trim()
+			String chunkTextToAppend = this.keepSeparator ? chunkText.trim()
 					: chunkText.replace(System.lineSeparator(), " ").trim();
 			if (chunkTextToAppend.length() > this.minChunkLengthToEmbed) {
 				chunks.add(chunkTextToAppend);
@@ -107,14 +107,14 @@ public class TokenTextSplitter extends TextSplitter {
 			// Remove the tokens corresponding to the chunk text from the remaining tokens
 			tokens = tokens.subList(getEncodedTokens(chunkText).size(), tokens.size());
 
-			num_chunks++;
+			numChunks++;
 		}
 
 		// Handle the remaining tokens
 		if (!tokens.isEmpty()) {
-			String remaining_text = decodeTokens(tokens).replace(System.lineSeparator(), " ").trim();
-			if (remaining_text.length() > this.minChunkLengthToEmbed) {
-				chunks.add(remaining_text);
+			String remainingText = decodeTokens(tokens).replace(System.lineSeparator(), " ").trim();
+			if (remainingText.length() > this.minChunkLengthToEmbed) {
+				chunks.add(remainingText);
 			}
 		}
 

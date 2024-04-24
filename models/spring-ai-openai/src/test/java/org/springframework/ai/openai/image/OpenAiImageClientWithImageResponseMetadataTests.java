@@ -48,7 +48,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(OpenAiImageClientWithImageResponseMetadataTests.Config.class)
 public class OpenAiImageClientWithImageResponseMetadataTests {
 
-	private static String TEST_API_KEY = "sk-1234567890";
+	private static String testApiKey = "sk-1234567890";
 
 	@Autowired
 	private OpenAiImageClient openAiImageClient;
@@ -102,7 +102,7 @@ public class OpenAiImageClientWithImageResponseMetadataTests {
 
 		server.expect(requestTo("v1/images/generations"))
 			.andExpect(method(HttpMethod.POST))
-			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + TEST_API_KEY))
+			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + testApiKey))
 			.andRespond(withSuccess(getJson(), MediaType.APPLICATION_JSON).headers(httpHeaders));
 
 	}
@@ -128,7 +128,7 @@ public class OpenAiImageClientWithImageResponseMetadataTests {
 
 		@Bean
 		public OpenAiImageApi imageGenerationApi(RestClient.Builder builder) {
-			return new OpenAiImageApi("", TEST_API_KEY, builder);
+			return new OpenAiImageApi("", testApiKey, builder);
 		}
 
 		@Bean

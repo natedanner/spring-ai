@@ -73,7 +73,7 @@ public class AzureOpenAiEmbeddingClient extends AbstractEmbeddingClient {
 		EmbeddingResponse response = this
 			.call(new EmbeddingRequest(List.of(document.getFormattedContent(this.metadataMode)), null));
 		logger.debug("Embeddings retrieved");
-		return response.getResults().stream().map(embedding -> embedding.getOutput()).flatMap(List::stream).toList();
+		return response.getResults().stream().map(Embedding::getOutput).flatMap(List::stream).toList();
 	}
 
 	@Override

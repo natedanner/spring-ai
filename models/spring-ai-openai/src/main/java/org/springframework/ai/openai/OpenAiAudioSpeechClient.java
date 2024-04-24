@@ -46,7 +46,7 @@ public class OpenAiAudioSpeechClient implements SpeechClient, StreamingSpeechCli
 
 	private final OpenAiAudioSpeechOptions defaultOptions;
 
-	private static final Float SPEED = 1.0f;
+	private static final Float SPEED = 1.0F;
 
 	public final RetryTemplate retryTemplate = RetryTemplate.builder()
 		.maxAttempts(10)

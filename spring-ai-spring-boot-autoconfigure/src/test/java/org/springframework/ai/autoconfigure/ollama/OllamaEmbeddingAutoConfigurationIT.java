@@ -45,7 +45,7 @@ public class OllamaEmbeddingAutoConfigurationIT {
 
 	private static final Log logger = LogFactory.getLog(OllamaEmbeddingAutoConfigurationIT.class);
 
-	private static String MODEL_NAME = "orca-mini";
+	private static String modelName = "orca-mini";
 
 	@Container
 	static GenericContainer<?> ollamaContainer = new GenericContainer<>("ollama/ollama:0.1.29").withExposedPorts(11434);
@@ -54,15 +54,15 @@ public class OllamaEmbeddingAutoConfigurationIT {
 
 	@BeforeAll
 	public static void beforeAll() throws IOException, InterruptedException {
-		logger.info("Start pulling the '" + MODEL_NAME + " ' generative ... would take several minutes ...");
-		ollamaContainer.execInContainer("ollama", "pull", MODEL_NAME);
-		logger.info(MODEL_NAME + " pulling competed!");
+		logger.info("Start pulling the '" + modelName + " ' generative ... would take several minutes ...");
+		ollamaContainer.execInContainer("ollama", "pull", modelName);
+		logger.info(modelName + " pulling competed!");
 
 		baseUrl = "http://" + ollamaContainer.getHost() + ":" + ollamaContainer.getMappedPort(11434);
 	}
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
-		.withPropertyValues("spring.ai.ollama.embedding.options.model=" + MODEL_NAME,
+		.withPropertyValues("spring.ai.ollama.embedding.options.model=" + modelName,
 				"spring.ai.ollama.base-url=" + baseUrl)
 		.withConfiguration(AutoConfigurations.of(RestClientAutoConfiguration.class, OllamaAutoConfiguration.class));
 

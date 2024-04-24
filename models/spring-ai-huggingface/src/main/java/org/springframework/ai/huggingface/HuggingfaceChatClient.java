@@ -49,17 +49,17 @@ public class HuggingfaceChatClient implements ChatClient {
 	/**
 	 * Client for making API calls.
 	 */
-	private ApiClient apiClient = new ApiClient();
+	private final ApiClient apiClient = new ApiClient();
 
 	/**
 	 * Mapper for converting between Java objects and JSON.
 	 */
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
 	 * API for text generation inferences.
 	 */
-	private TextGenerationInferenceApi textGenApi = new TextGenerationInferenceApi();
+	private final TextGenerationInferenceApi textGenApi = new TextGenerationInferenceApi();
 
 	/**
 	 * The maximum number of new tokens to be generated. Note: The total token size for

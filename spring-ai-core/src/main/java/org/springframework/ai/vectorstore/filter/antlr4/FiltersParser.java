@@ -53,13 +53,39 @@ public class FiltersParser extends Parser {
 
 	protected static final PredictionContextCache _sharedContextCache = new PredictionContextCache();
 
-	public static final int WHERE = 1, DOT = 2, COMMA = 3, LEFT_SQUARE_BRACKETS = 4, RIGHT_SQUARE_BRACKETS = 5,
-			LEFT_PARENTHESIS = 6, RIGHT_PARENTHESIS = 7, EQUALS = 8, MINUS = 9, PLUS = 10, GT = 11, GE = 12, LT = 13,
-			LE = 14, NE = 15, AND = 16, OR = 17, IN = 18, NIN = 19, NOT = 20, BOOLEAN_VALUE = 21, QUOTED_STRING = 22,
-			INTEGER_VALUE = 23, DECIMAL_VALUE = 24, IDENTIFIER = 25, WS = 26;
+	public static final int WHERE = 1;
+	public static final int DOT = 2;
+	public static final int COMMA = 3;
+	public static final int LEFT_SQUARE_BRACKETS = 4;
+	public static final int RIGHT_SQUARE_BRACKETS = 5;
+	public static final int LEFT_PARENTHESIS = 6;
+	public static final int RIGHT_PARENTHESIS = 7;
+	public static final int EQUALS = 8;
+	public static final int MINUS = 9;
+	public static final int PLUS = 10;
+	public static final int GT = 11;
+	public static final int GE = 12;
+	public static final int LT = 13;
+	public static final int LE = 14;
+	public static final int NE = 15;
+	public static final int AND = 16;
+	public static final int OR = 17;
+	public static final int IN = 18;
+	public static final int NIN = 19;
+	public static final int NOT = 20;
+	public static final int BOOLEAN_VALUE = 21;
+	public static final int QUOTED_STRING = 22;
+	public static final int INTEGER_VALUE = 23;
+	public static final int DECIMAL_VALUE = 24;
+	public static final int IDENTIFIER = 25;
+	public static final int WS = 26;
 
-	public static final int RULE_where = 0, RULE_booleanExpression = 1, RULE_constantArray = 2, RULE_compare = 3,
-			RULE_identifier = 4, RULE_constant = 5;
+	public static final int RULE_where = 0;
+	public static final int RULE_booleanExpression = 1;
+	public static final int RULE_constantArray = 2;
+	public static final int RULE_compare = 3;
+	public static final int RULE_identifier = 4;
+	public static final int RULE_constant = 5;
 
 	private static String[] makeRuleNames() {
 		return new String[] { "where", "booleanExpression", "constantArray", "compare", "identifier", "constant" };
@@ -167,31 +193,35 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterWhere(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitWhere(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitWhere(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
 
 	public final WhereContext where() throws RecognitionException {
-		WhereContext _localctx = new WhereContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_where);
+		WhereContext localctx = new WhereContext(_ctx, getState());
+		enterRule(localctx, 0, RULE_where);
 		try {
-			enterOuterAlt(_localctx, 1);
+			enterOuterAlt(localctx, 1);
 			{
 				setState(12);
 				match(WHERE);
@@ -202,14 +232,14 @@ public class FiltersParser extends Parser {
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
 			exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -262,22 +292,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterNinExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitNinExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitNinExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -309,22 +343,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterAndExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitAndExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitAndExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -350,22 +388,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterInExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitInExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitInExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -387,22 +429,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterNotExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitNotExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitNotExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -428,22 +474,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterCompareExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitCompareExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitCompareExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -475,22 +525,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterOrExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitOrExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitOrExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -516,22 +570,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterGroupExpression(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitGroupExpression(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitGroupExpression(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -541,23 +599,23 @@ public class FiltersParser extends Parser {
 	}
 
 	private BooleanExpressionContext booleanExpression(int _p) throws RecognitionException {
-		ParserRuleContext _parentctx = _ctx;
-		int _parentState = getState();
-		BooleanExpressionContext _localctx = new BooleanExpressionContext(_ctx, _parentState);
-		BooleanExpressionContext _prevctx = _localctx;
-		int _startState = 2;
-		enterRecursionRule(_localctx, 2, RULE_booleanExpression, _p);
+		ParserRuleContext parentctx = _ctx;
+		int parentState = getState();
+		BooleanExpressionContext localctx = new BooleanExpressionContext(_ctx, parentState);
+		BooleanExpressionContext prevctx = localctx;
+		int startState = 2;
+		enterRecursionRule(localctx, 2, RULE_booleanExpression, _p);
 		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
+			int alt;
+			enterOuterAlt(localctx, 1);
 			{
 				setState(39);
 				_errHandler.sync(this);
 				switch (getInterpreter().adaptivePredict(_input, 1, _ctx)) {
 					case 1: {
-						_localctx = new CompareExpressionContext(_localctx);
-						_ctx = _localctx;
-						_prevctx = _localctx;
+						localctx = new CompareExpressionContext(localctx);
+						_ctx = localctx;
+						prevctx = localctx;
 
 						setState(17);
 						identifier();
@@ -568,9 +626,9 @@ public class FiltersParser extends Parser {
 					}
 						break;
 					case 2: {
-						_localctx = new InExpressionContext(_localctx);
-						_ctx = _localctx;
-						_prevctx = _localctx;
+						localctx = new InExpressionContext(localctx);
+						_ctx = localctx;
+						prevctx = localctx;
 						setState(21);
 						identifier();
 						setState(22);
@@ -580,9 +638,9 @@ public class FiltersParser extends Parser {
 					}
 						break;
 					case 3: {
-						_localctx = new NinExpressionContext(_localctx);
-						_ctx = _localctx;
-						_prevctx = _localctx;
+						localctx = new NinExpressionContext(localctx);
+						_ctx = localctx;
+						prevctx = localctx;
 						setState(25);
 						identifier();
 						setState(29);
@@ -608,9 +666,9 @@ public class FiltersParser extends Parser {
 					}
 						break;
 					case 4: {
-						_localctx = new GroupExpressionContext(_localctx);
-						_ctx = _localctx;
-						_prevctx = _localctx;
+						localctx = new GroupExpressionContext(localctx);
+						_ctx = localctx;
+						prevctx = localctx;
 						setState(33);
 						match(LEFT_PARENTHESIS);
 						setState(34);
@@ -620,9 +678,9 @@ public class FiltersParser extends Parser {
 					}
 						break;
 					case 5: {
-						_localctx = new NotExpressionContext(_localctx);
-						_ctx = _localctx;
-						_prevctx = _localctx;
+						localctx = new NotExpressionContext(localctx);
+						_ctx = localctx;
+						prevctx = localctx;
 						setState(37);
 						match(NOT);
 						setState(38);
@@ -633,62 +691,61 @@ public class FiltersParser extends Parser {
 				_ctx.stop = _input.LT(-1);
 				setState(49);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input, 3, _ctx);
-				while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
-					if (_alt == 1) {
-						if (_parseListeners != null)
+				alt = getInterpreter().adaptivePredict(_input, 3, _ctx);
+				while (alt != 2 && alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
+					if (alt == 1) {
+						if (_parseListeners != null) {
 							triggerExitRuleEvent();
-						_prevctx = _localctx;
+						}
+						prevctx = localctx;
 						{
 							setState(47);
 							_errHandler.sync(this);
-							switch (getInterpreter().adaptivePredict(_input, 2, _ctx)) {
-								case 1: {
-									_localctx = new AndExpressionContext(
-											new BooleanExpressionContext(_parentctx, _parentState));
-									((AndExpressionContext) _localctx).left = _prevctx;
-									pushNewRecursionContext(_localctx, _startState, RULE_booleanExpression);
-									setState(41);
-									if (!(precpred(_ctx, 4)))
-										throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-									setState(42);
-									((AndExpressionContext) _localctx).operator = match(AND);
-									setState(43);
-									((AndExpressionContext) _localctx).right = booleanExpression(5);
+							if (getInterpreter().adaptivePredict(_input, 2, _ctx) == 1) {
+								localctx = new AndExpressionContext(
+									new BooleanExpressionContext(parentctx, parentState));
+								((AndExpressionContext) localctx).left = prevctx;
+								pushNewRecursionContext(localctx, startState, RULE_booleanExpression);
+								setState(41);
+								if (!precpred(_ctx, 4)) {
+									throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 								}
-									break;
-								case 2: {
-									_localctx = new OrExpressionContext(
-											new BooleanExpressionContext(_parentctx, _parentState));
-									((OrExpressionContext) _localctx).left = _prevctx;
-									pushNewRecursionContext(_localctx, _startState, RULE_booleanExpression);
-									setState(44);
-									if (!(precpred(_ctx, 3)))
-										throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-									setState(45);
-									((OrExpressionContext) _localctx).operator = match(OR);
-									setState(46);
-									((OrExpressionContext) _localctx).right = booleanExpression(4);
+								setState(42);
+								((AndExpressionContext) localctx).operator = match(AND);
+								setState(43);
+								((AndExpressionContext) localctx).right = booleanExpression(5);
+							}
+							else if (getInterpreter().adaptivePredict(_input, 2, _ctx) == 2) {
+								localctx = new OrExpressionContext(
+									new BooleanExpressionContext(parentctx, parentState));
+								((OrExpressionContext) localctx).left = prevctx;
+								pushNewRecursionContext(localctx, startState, RULE_booleanExpression);
+								setState(44);
+								if (!precpred(_ctx, 3)) {
+									throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 								}
-									break;
+								setState(45);
+								((OrExpressionContext) localctx).operator = match(OR);
+								setState(46);
+								((OrExpressionContext) localctx).right = booleanExpression(4);
 							}
 						}
 					}
 					setState(51);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input, 3, _ctx);
+					alt = getInterpreter().adaptivePredict(_input, 3, _ctx);
 				}
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
-			unrollRecursionContexts(_parentctx);
+			unrollRecursionContexts(parentctx);
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -729,32 +786,36 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterConstantArray(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitConstantArray(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitConstantArray(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
 
 	public final ConstantArrayContext constantArray() throws RecognitionException {
-		ConstantArrayContext _localctx = new ConstantArrayContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_constantArray);
-		int _la;
+		ConstantArrayContext localctx = new ConstantArrayContext(_ctx, getState());
+		enterRule(localctx, 4, RULE_constantArray);
+		int la;
 		try {
-			enterOuterAlt(_localctx, 1);
+			enterOuterAlt(localctx, 1);
 			{
 				setState(52);
 				match(LEFT_SQUARE_BRACKETS);
@@ -762,8 +823,8 @@ public class FiltersParser extends Parser {
 				constant();
 				setState(58);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la == COMMA) {
+				la = _input.LA(1);
+				while (la == COMMA) {
 					{
 						{
 							setState(54);
@@ -774,21 +835,21 @@ public class FiltersParser extends Parser {
 					}
 					setState(60);
 					_errHandler.sync(this);
-					_la = _input.LA(1);
+					la = _input.LA(1);
 				}
 				setState(61);
 				match(RIGHT_SQUARE_BRACKETS);
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
 			exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -829,55 +890,60 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterCompare(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitCompare(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitCompare(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
 
 	public final CompareContext compare() throws RecognitionException {
-		CompareContext _localctx = new CompareContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_compare);
-		int _la;
+		CompareContext localctx = new CompareContext(_ctx, getState());
+		enterRule(localctx, 6, RULE_compare);
+		int la;
 		try {
-			enterOuterAlt(_localctx, 1);
+			enterOuterAlt(localctx, 1);
 			{
 				setState(63);
-				_la = _input.LA(1);
-				if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & 63744L) != 0))) {
+				la = _input.LA(1);
+				if (!((la & ~0x3f) == 0 && ((1L << la) & 63744L) != 0)) {
 					_errHandler.recoverInline(this);
 				}
 				else {
-					if (_input.LA(1) == Token.EOF)
+					if (_input.LA(1) == Token.EOF) {
 						matchedEOF = true;
+					}
 					_errHandler.reportMatch(this);
 					consume();
 				}
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
 			exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -910,35 +976,39 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterIdentifier(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitIdentifier(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitIdentifier(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
 
 	public final IdentifierContext identifier() throws RecognitionException {
-		IdentifierContext _localctx = new IdentifierContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_identifier);
+		IdentifierContext localctx = new IdentifierContext(_ctx, getState());
+		enterRule(localctx, 8, RULE_identifier);
 		try {
 			setState(70);
 			_errHandler.sync(this);
 			switch (getInterpreter().adaptivePredict(_input, 5, _ctx)) {
 				case 1:
-					enterOuterAlt(_localctx, 1); {
+					enterOuterAlt(localctx, 1); {
 					setState(65);
 					match(IDENTIFIER);
 					setState(66);
@@ -948,13 +1018,13 @@ public class FiltersParser extends Parser {
 				}
 					break;
 				case 2:
-					enterOuterAlt(_localctx, 2); {
+					enterOuterAlt(localctx, 2); {
 					setState(68);
 					match(IDENTIFIER);
 				}
 					break;
 				case 3:
-					enterOuterAlt(_localctx, 3); {
+					enterOuterAlt(localctx, 3); {
 					setState(69);
 					match(QUOTED_STRING);
 				}
@@ -962,14 +1032,14 @@ public class FiltersParser extends Parser {
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
 			exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -1014,22 +1084,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterDecimalConstant(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitDecimalConstant(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitDecimalConstant(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -1051,22 +1125,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterTextConstant(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitTextConstant(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitTextConstant(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -1084,22 +1162,26 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterBooleanConstant(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitBooleanConstant(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitBooleanConstant(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
@@ -1125,51 +1207,56 @@ public class FiltersParser extends Parser {
 
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).enterIntegerConstant(this);
+			}
 		}
 
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if (listener instanceof FiltersListener)
+			if (listener instanceof FiltersListener) {
 				((FiltersListener) listener).exitIntegerConstant(this);
+			}
 		}
 
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if (visitor instanceof FiltersVisitor)
+			if (visitor instanceof FiltersVisitor) {
 				return ((FiltersVisitor<? extends T>) visitor).visitIntegerConstant(this);
-			else
+			}
+			else {
 				return visitor.visitChildren(this);
+			}
 		}
 
 	}
 
 	public final ConstantContext constant() throws RecognitionException {
-		ConstantContext _localctx = new ConstantContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_constant);
-		int _la;
+		ConstantContext localctx = new ConstantContext(_ctx, getState());
+		enterRule(localctx, 10, RULE_constant);
+		int la;
 		try {
-			int _alt;
+			int alt;
 			setState(86);
 			_errHandler.sync(this);
 			switch (getInterpreter().adaptivePredict(_input, 9, _ctx)) {
 				case 1:
-					_localctx = new IntegerConstantContext(_localctx);
-					enterOuterAlt(_localctx, 1); {
+					localctx = new IntegerConstantContext(localctx);
+					enterOuterAlt(localctx, 1); {
 					setState(73);
 					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la == MINUS || _la == PLUS) {
+					la = _input.LA(1);
+					if (la == MINUS || la == PLUS) {
 						{
 							setState(72);
-							_la = _input.LA(1);
-							if (!(_la == MINUS || _la == PLUS)) {
+							la = _input.LA(1);
+							if (!(la == MINUS || la == PLUS)) {
 								_errHandler.recoverInline(this);
 							}
 							else {
-								if (_input.LA(1) == Token.EOF)
+								if (_input.LA(1) == Token.EOF) {
 									matchedEOF = true;
+								}
 								_errHandler.reportMatch(this);
 								consume();
 							}
@@ -1181,21 +1268,22 @@ public class FiltersParser extends Parser {
 				}
 					break;
 				case 2:
-					_localctx = new DecimalConstantContext(_localctx);
-					enterOuterAlt(_localctx, 2); {
+					localctx = new DecimalConstantContext(localctx);
+					enterOuterAlt(localctx, 2); {
 					setState(77);
 					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la == MINUS || _la == PLUS) {
+					la = _input.LA(1);
+					if (la == MINUS || la == PLUS) {
 						{
 							setState(76);
-							_la = _input.LA(1);
-							if (!(_la == MINUS || _la == PLUS)) {
+							la = _input.LA(1);
+							if (!(la == MINUS || la == PLUS)) {
 								_errHandler.recoverInline(this);
 							}
 							else {
-								if (_input.LA(1) == Token.EOF)
+								if (_input.LA(1) == Token.EOF) {
 									matchedEOF = true;
+								}
 								_errHandler.reportMatch(this);
 								consume();
 							}
@@ -1207,33 +1295,31 @@ public class FiltersParser extends Parser {
 				}
 					break;
 				case 3:
-					_localctx = new TextConstantContext(_localctx);
-					enterOuterAlt(_localctx, 3); {
+					localctx = new TextConstantContext(localctx);
+					enterOuterAlt(localctx, 3); {
 					setState(81);
 					_errHandler.sync(this);
-					_alt = 1;
+					alt = 1;
 					do {
-						switch (_alt) {
-							case 1: {
-								{
-									setState(80);
-									match(QUOTED_STRING);
-								}
+						if (alt == 1) {
+							{
+								setState(80);
+								match(QUOTED_STRING);
 							}
-								break;
-							default:
-								throw new NoViableAltException(this);
+						}
+						else {
+							throw new NoViableAltException(this);
 						}
 						setState(83);
 						_errHandler.sync(this);
-						_alt = getInterpreter().adaptivePredict(_input, 8, _ctx);
+						alt = getInterpreter().adaptivePredict(_input, 8, _ctx);
 					}
-					while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
+					while (alt != 2 && alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
 				}
 					break;
 				case 4:
-					_localctx = new BooleanConstantContext(_localctx);
-					enterOuterAlt(_localctx, 4); {
+					localctx = new BooleanConstantContext(localctx);
+					enterOuterAlt(localctx, 4); {
 					setState(85);
 					match(BOOLEAN_VALUE);
 				}
@@ -1241,30 +1327,29 @@ public class FiltersParser extends Parser {
 			}
 		}
 		catch (RecognitionException re) {
-			_localctx.exception = re;
+			localctx.exception = re;
 			_errHandler.reportError(this, re);
 			_errHandler.recover(this, re);
 		}
 		finally {
 			exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
-		switch (ruleIndex) {
-			case 1:
-				return booleanExpression_sempred((BooleanExpressionContext) _localctx, predIndex);
+		if (ruleIndex == 1) {
+			return booleanExpressionSempred((BooleanExpressionContext) _localctx, predIndex);
 		}
 		return true;
 	}
 
-	private boolean booleanExpression_sempred(BooleanExpressionContext _localctx, int predIndex) {
-		switch (predIndex) {
-			case 0:
-				return precpred(_ctx, 4);
-			case 1:
-				return precpred(_ctx, 3);
+	private boolean booleanExpressionSempred(BooleanExpressionContext _localctx, int predIndex) {
+		if (predIndex == 0) {
+			return precpred(_ctx, 4);
+		}
+		else if (predIndex == 1) {
+			return precpred(_ctx, 3);
 		}
 		return true;
 	}

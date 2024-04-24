@@ -46,7 +46,7 @@ import org.springframework.util.Assert;
  */
 public class OpenAiImageClient implements ImageClient {
 
-	private final static Logger logger = LoggerFactory.getLogger(OpenAiImageClient.class);
+	private static final Logger logger = LoggerFactory.getLogger(OpenAiImageClient.class);
 
 	private OpenAiImageOptions defaultOptions;
 
@@ -108,10 +108,8 @@ public class OpenAiImageClient implements ImageClient {
 			return new ImageResponse(List.of());
 		}
 
-		List<ImageGeneration> imageGenerationList = imageApiResponse.data().stream().map(entry -> {
-			return new ImageGeneration(new Image(entry.url(), entry.b64Json()),
-					new OpenAiImageGenerationMetadata(entry.revisedPrompt()));
-		}).toList();
+		List<ImageGeneration> imageGenerationList = imageApiResponse.data().stream().map(entry -> new ImageGeneration(new Image(entry.url(), entry.b64Json()),
+					new OpenAiImageGenerationMetadata(entry.revisedPrompt()))).toList();
 
 		ImageResponseMetadata openAiImageResponseMetadata = OpenAiImageResponseMetadata.from(imageApiResponse);
 		return new ImageResponse(imageGenerationList, openAiImageResponseMetadata);

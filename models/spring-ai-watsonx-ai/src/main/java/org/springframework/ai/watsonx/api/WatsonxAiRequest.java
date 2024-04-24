@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
 
 // @formatter:off
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WatsonxAiRequest {
+public final class WatsonxAiRequest {
 
     @JsonProperty("input")
     private String input;

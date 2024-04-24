@@ -88,7 +88,7 @@ public class BasicAuthChromaWhereIT {
 				.withFilterExpression("author in ['john', 'jill']"));
 
 			assertThat(results).hasSize(2);
-			assertThat(results.stream().map(d -> d.getId()).toList()).containsExactlyInAnyOrder("1", "3");
+			assertThat(results.stream().map(Document::getId).toList()).containsExactlyInAnyOrder("1", "3");
 		});
 	}
 

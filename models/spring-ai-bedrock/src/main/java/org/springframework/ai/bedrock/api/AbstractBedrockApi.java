@@ -291,7 +291,7 @@ public abstract class AbstractBedrockApi<I, O, SO> {
 
 		InvokeModelWithResponseStreamResponseHandler.Visitor visitor = InvokeModelWithResponseStreamResponseHandler.Visitor
 				.builder()
-				.onChunk((chunk) -> {
+				.onChunk(chunk -> {
 					try {
 						logger.debug("Received chunk: " + chunk.bytes().asString(StandardCharsets.UTF_8));
 						SO response = this.objectMapper.readValue(chunk.bytes().asByteArray(), clazz);
@@ -302,7 +302,7 @@ public abstract class AbstractBedrockApi<I, O, SO> {
 						eventSink.tryEmitError(e);
 					}
 				})
-				.onDefault((event) -> {
+				.onDefault(event -> {
 					logger.error("Unknown or unhandled event: " + event.toString());
 					eventSink.tryEmitError(new Throwable("Unknown or unhandled event: " + event.toString()));
 				})
@@ -316,21 +316,20 @@ public abstract class AbstractBedrockApi<I, O, SO> {
 							while(!emitResult.isSuccess()){
 								System.out.println("Emitting complete:" + emitResult);
 								emitResult = eventSink.tryEmitComplete();
-							};
+							}
 							eventSink.emitComplete(EmitFailureHandler.busyLooping(Duration.ofSeconds(3)));
 							// EmitResult emitResult = eventSink.tryEmitComplete();
 							logger.debug("\nCompleted streaming response.");
 						})
-				.onError((error) -> {
+				.onError(error -> {
 					logger.error("\n\nError streaming response: " + error.getMessage());
 					eventSink.tryEmitError(error);
 				})
-				.onEventStream((stream) -> {
+				.onEventStream(stream ->
 					stream.subscribe(
 							(ResponseStream e) -> {
 								e.accept(visitor);
-							});
-				})
+							}))
 				.build();
 
 		this.clientStreaming.invokeModelWithResponseStream(invokeRequest, responseHandler);

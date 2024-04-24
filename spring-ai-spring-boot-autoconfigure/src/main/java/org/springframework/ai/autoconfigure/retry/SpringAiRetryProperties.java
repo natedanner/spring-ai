@@ -46,7 +46,7 @@ public class SpringAiRetryProperties {
 	 * error codes. False by default. If true, throw a TransientAiException, and attempt
 	 * retry for 4xx client.
 	 */
-	private boolean onClientErrors = false;
+	private boolean onClientErrors;
 
 	/**
 	 * List of HTTP status codes that should not trigger a retry (e.g. throw

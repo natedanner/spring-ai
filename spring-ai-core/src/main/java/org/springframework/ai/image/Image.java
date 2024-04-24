@@ -57,10 +57,12 @@ public class Image {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Image image))
+		}
+		if (!(o instanceof Image image)) {
 			return false;
+		}
 		return Objects.equals(url, image.url) && Objects.equals(b64Json, image.b64Json);
 	}
 

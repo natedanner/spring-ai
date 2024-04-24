@@ -29,13 +29,13 @@ public interface ChatClient extends ModelClient<Prompt, ChatResponse> {
 	default String call(String message) {
 		Prompt prompt = new Prompt(new UserMessage(message));
 		Generation generation = call(prompt).getResult();
-		return (generation != null) ? generation.getOutput().getContent() : "";
+		return generation != null ? generation.getOutput().getContent() : "";
 	}
 
 	default String call(Message... messages) {
 		Prompt prompt = new Prompt(Arrays.asList(messages));
 		Generation generation = call(prompt).getResult();
-		return (generation != null) ? generation.getOutput().getContent() : "";
+		return generation != null ? generation.getOutput().getContent() : "";
 	}
 
 	@Override

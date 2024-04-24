@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TextReaderTests {
 
-	private Resource resource = new DefaultResourceLoader().getResource("classpath:text_source.txt");
+	private final Resource resource = new DefaultResourceLoader().getResource("classpath:text_source.txt");
 
 	@Test
 	void loadText() {

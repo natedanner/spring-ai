@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // @formatter:off
-public class MessageToPromptConverter {
+public final class MessageToPromptConverter {
 
     private static final String HUMAN_PROMPT = "Human: ";
     private static final String ASSISTANT_PROMPT = "Assistant: ";

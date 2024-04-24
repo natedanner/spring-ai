@@ -34,7 +34,7 @@ public class BedrockLlama2ChatProperties {
 	/**
 	 * Enable Bedrock Llama2 chat client. Disabled by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * The generative id to use. See the {@link Llama2ChatModel} for the supported models.

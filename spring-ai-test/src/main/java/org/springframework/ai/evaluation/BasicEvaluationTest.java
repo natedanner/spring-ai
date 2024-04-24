@@ -70,7 +70,7 @@ public class BasicEvaluationTest {
 		Prompt prompt = new Prompt(List.of(userMessage, systemMessage));
 		String yesOrNo = openAiChatClient.call(prompt).getResult().getOutput().getContent();
 		logger.info("Is Answer related to question: " + yesOrNo);
-		if (yesOrNo.equalsIgnoreCase("no")) {
+		if ("no".equalsIgnoreCase(yesOrNo)) {
 			SystemMessage notRelatedSystemMessage = new SystemMessage(qaEvaluatorNotRelatedResource);
 			prompt = new Prompt(List.of(userMessage, notRelatedSystemMessage));
 			String reasonForFailure = openAiChatClient.call(prompt).getResult().getOutput().getContent();

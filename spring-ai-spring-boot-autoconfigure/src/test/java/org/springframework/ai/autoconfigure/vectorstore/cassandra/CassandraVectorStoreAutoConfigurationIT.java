@@ -82,7 +82,7 @@ class CassandraVectorStoreAutoConfigurationIT {
 						"Spring AI provides abstractions that serve as the foundation for developing AI applications.");
 
 				// Remove all documents from the store
-				vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+				vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 				results = vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 				assertThat(results).isEmpty();

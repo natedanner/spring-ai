@@ -87,7 +87,7 @@ public class BedrockTitanEmbeddingClient extends AbstractEmbeddingClient {
 
 		List<List<Double>> embeddingList = new ArrayList<>();
 		for (String inputContent : request.getInstructions()) {
-			var apiRequest = (this.inputType == InputType.IMAGE)
+			var apiRequest = this.inputType == InputType.IMAGE
 					? new TitanEmbeddingRequest.Builder().withInputImage(inputContent).build()
 					: new TitanEmbeddingRequest.Builder().withInputText(inputContent).build();
 			TitanEmbeddingResponse response = this.embeddingApi.embedding(apiRequest);

@@ -22,6 +22,7 @@ import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.Generation;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.vertexai.palm2.api.VertexAiPaLm2Api;
@@ -77,7 +78,7 @@ public class VertexAiPaLm2ChatClient implements ChatClient {
 		String vertexContext = prompt.getInstructions()
 			.stream()
 			.filter(m -> m.getMessageType() == MessageType.SYSTEM)
-			.map(m -> m.getContent())
+			.map(Message::getContent)
 			.collect(Collectors.joining(System.lineSeparator()));
 
 		List<VertexAiPaLm2Api.Message> vertexMessages = prompt.getInstructions()

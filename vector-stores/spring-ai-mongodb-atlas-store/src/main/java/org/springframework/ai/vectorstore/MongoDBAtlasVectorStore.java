@@ -153,7 +153,7 @@ public class MongoDBAtlasVectorStore implements VectorStore, InitializingBean {
 	@Override
 	public List<Document> similaritySearch(SearchRequest request) {
 
-		String nativeFilterExpressions = (request.getFilterExpression() != null)
+		String nativeFilterExpressions = request.getFilterExpression() != null
 				? this.filterExpressionConverter.convertExpression(request.getFilterExpression()) : "";
 
 		List<Double> queryEmbedding = this.embeddingClient.embed(request.getQuery());
@@ -174,7 +174,7 @@ public class MongoDBAtlasVectorStore implements VectorStore, InitializingBean {
 			.toList();
 	}
 
-	public static class MongoDBVectorStoreConfig {
+	public static final class MongoDBVectorStoreConfig {
 
 		private final String collectionName;
 
@@ -202,7 +202,7 @@ public class MongoDBAtlasVectorStore implements VectorStore, InitializingBean {
 			return builder().build();
 		}
 
-		public static class Builder {
+		public static final class Builder {
 
 			private String collectionName = DEFAULT_VECTOR_COLLECTION_NAME;
 

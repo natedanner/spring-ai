@@ -58,7 +58,7 @@ public class ChatCompletionRequestTests {
 	@Test
 	public void promptOptionsTools() {
 
-		final String TOOL_FUNCTION_NAME = "CurrentWeather";
+		final String toolFunctionName = "CurrentWeather";
 
 		var client = new OpenAiChatClient(new OpenAiApi("TEST"),
 				OpenAiChatOptions.builder().withModel("DEFAULT_MODEL").build());
@@ -67,44 +67,44 @@ public class ChatCompletionRequestTests {
 				OpenAiChatOptions.builder()
 					.withModel("PROMPT_MODEL")
 					.withFunctionCallbacks(List.of(FunctionCallbackWrapper.builder(new MockWeatherService())
-						.withName(TOOL_FUNCTION_NAME)
+						.withName(toolFunctionName)
 						.withDescription("Get the weather in location")
-						.withResponseConverter((response) -> "" + response.temp() + response.unit())
+						.withResponseConverter(response -> "" + response.temp() + response.unit())
 						.build()))
 					.build()),
 				false);
 
 		assertThat(client.getFunctionCallbackRegister()).hasSize(1);
-		assertThat(client.getFunctionCallbackRegister()).containsKeys(TOOL_FUNCTION_NAME);
+		assertThat(client.getFunctionCallbackRegister()).containsKeys(toolFunctionName);
 
 		assertThat(request.messages()).hasSize(1);
 		assertThat(request.stream()).isFalse();
 		assertThat(request.model()).isEqualTo("PROMPT_MODEL");
 
 		assertThat(request.tools()).hasSize(1);
-		assertThat(request.tools().get(0).function().name()).isEqualTo(TOOL_FUNCTION_NAME);
+		assertThat(request.tools().get(0).function().name()).isEqualTo(toolFunctionName);
 	}
 
 	@Test
 	public void defaultOptionsTools() {
 
-		final String TOOL_FUNCTION_NAME = "CurrentWeather";
+		final String toolFunctionName = "CurrentWeather";
 
 		var client = new OpenAiChatClient(new OpenAiApi("TEST"),
 				OpenAiChatOptions.builder()
 					.withModel("DEFAULT_MODEL")
 					.withFunctionCallbacks(List.of(FunctionCallbackWrapper.builder(new MockWeatherService())
-						.withName(TOOL_FUNCTION_NAME)
+						.withName(toolFunctionName)
 						.withDescription("Get the weather in location")
-						.withResponseConverter((response) -> "" + response.temp() + response.unit())
+						.withResponseConverter(response -> "" + response.temp() + response.unit())
 						.build()))
 					.build());
 
 		var request = client.createRequest(new Prompt("Test message content"), false);
 
 		assertThat(client.getFunctionCallbackRegister()).hasSize(1);
-		assertThat(client.getFunctionCallbackRegister()).containsKeys(TOOL_FUNCTION_NAME);
-		assertThat(client.getFunctionCallbackRegister().get(TOOL_FUNCTION_NAME).getDescription())
+		assertThat(client.getFunctionCallbackRegister()).containsKeys(toolFunctionName);
+		assertThat(client.getFunctionCallbackRegister().get(toolFunctionName).getDescription())
 			.isEqualTo("Get the weather in location");
 
 		assertThat(request.messages()).hasSize(1);
@@ -116,17 +116,17 @@ public class ChatCompletionRequestTests {
 
 		// Explicitly enable the function
 		request = client.createRequest(new Prompt("Test message content",
-				OpenAiChatOptions.builder().withFunction(TOOL_FUNCTION_NAME).build()), false);
+				OpenAiChatOptions.builder().withFunction(toolFunctionName).build()), false);
 
 		assertThat(request.tools()).hasSize(1);
 		assertThat(request.tools().get(0).function().name()).as("Explicitly enabled function")
-			.isEqualTo(TOOL_FUNCTION_NAME);
+			.isEqualTo(toolFunctionName);
 
 		// Override the default options function with one from the prompt
 		request = client.createRequest(new Prompt("Test message content",
 				OpenAiChatOptions.builder()
 					.withFunctionCallbacks(List.of(FunctionCallbackWrapper.builder(new MockWeatherService())
-						.withName(TOOL_FUNCTION_NAME)
+						.withName(toolFunctionName)
 						.withDescription("Overridden function description")
 						.build()))
 					.build()),
@@ -134,11 +134,11 @@ public class ChatCompletionRequestTests {
 
 		assertThat(request.tools()).hasSize(1);
 		assertThat(request.tools().get(0).function().name()).as("Explicitly enabled function")
-			.isEqualTo(TOOL_FUNCTION_NAME);
+			.isEqualTo(toolFunctionName);
 
 		assertThat(client.getFunctionCallbackRegister()).hasSize(1);
-		assertThat(client.getFunctionCallbackRegister()).containsKeys(TOOL_FUNCTION_NAME);
-		assertThat(client.getFunctionCallbackRegister().get(TOOL_FUNCTION_NAME).getDescription())
+		assertThat(client.getFunctionCallbackRegister()).containsKeys(toolFunctionName);
+		assertThat(client.getFunctionCallbackRegister().get(toolFunctionName).getDescription())
 			.isEqualTo("Overridden function description");
 	}
 

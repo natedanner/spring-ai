@@ -40,8 +40,8 @@ public class ChatBuilderTests {
 
 	@Test
 	void createNewChatOptionsTest() {
-		Float temperature = 1.1f;
-		Float topP = 2.2f;
+		Float temperature = 1.1F;
+		Float topP = 2.2F;
 		Integer topK = 111;
 
 		ChatOptions options = ChatOptionsBuilder.builder()
@@ -57,8 +57,8 @@ public class ChatBuilderTests {
 
 	@Test
 	void duplicateChatOptionsTest() {
-		Float initTemperature = 1.1f;
-		Float initTopP = 2.2f;
+		Float initTemperature = 1.1F;
+		Float initTopP = 2.2F;
 		Integer initTopK = 111;
 
 		ChatOptions options = ChatOptionsBuilder.builder()
@@ -71,8 +71,8 @@ public class ChatBuilderTests {
 
 	@Test
 	void createFunctionCallingOptionTest() {
-		Float temperature = 1.1f;
-		Float topP = 2.2f;
+		Float temperature = 1.1F;
+		Float topP = 2.2F;
 		Integer topK = 111;
 		List<FunctionCallback> functionCallbacks = new ArrayList<>();
 		Set<String> functions = new HashSet<>();

@@ -128,11 +128,11 @@ public class OpenAiAudioSpeechOptions implements ModelOptions {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((input == null) ? 0 : input.hashCode());
-		result = prime * result + ((voice == null) ? 0 : voice.hashCode());
-		result = prime * result + ((responseFormat == null) ? 0 : responseFormat.hashCode());
-		result = prime * result + ((speed == null) ? 0 : speed.hashCode());
+		result = prime * result + (model == null ? 0 : model.hashCode());
+		result = prime * result + (input == null ? 0 : input.hashCode());
+		result = prime * result + (voice == null ? 0 : voice.hashCode());
+		result = prime * result + (responseFormat == null ? 0 : responseFormat.hashCode());
+		result = prime * result + (speed == null ? 0 : speed.hashCode());
 		return result;
 	}
 
@@ -158,42 +158,54 @@ public class OpenAiAudioSpeechOptions implements ModelOptions {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		OpenAiAudioSpeechOptions other = (OpenAiAudioSpeechOptions) obj;
 		if (model == null) {
-			if (other.model != null)
+			if (other.model != null) {
 				return false;
+			}
 		}
-		else if (!model.equals(other.model))
+		else if (!model.equals(other.model)) {
 			return false;
+		}
 		if (input == null) {
-			if (other.input != null)
+			if (other.input != null) {
 				return false;
+			}
 		}
-		else if (!input.equals(other.input))
+		else if (!input.equals(other.input)) {
 			return false;
+		}
 		if (voice == null) {
-			if (other.voice != null)
+			if (other.voice != null) {
 				return false;
+			}
 		}
-		else if (!voice.equals(other.voice))
+		else if (!voice.equals(other.voice)) {
 			return false;
+		}
 		if (responseFormat == null) {
-			if (other.responseFormat != null)
+			if (other.responseFormat != null) {
 				return false;
+			}
 		}
-		else if (!responseFormat.equals(other.responseFormat))
+		else if (!responseFormat.equals(other.responseFormat)) {
 			return false;
+		}
 		if (speed == null) {
 			return other.speed == null;
 		}
-		else
+		else {
 			return speed.equals(other.speed);
+		}
 	}
 
 	@Override

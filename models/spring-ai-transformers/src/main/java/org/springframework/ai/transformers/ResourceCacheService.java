@@ -134,7 +134,7 @@ public class ResourceCacheService {
 	private String getCacheName(Resource originalResource) throws IOException {
 		String fileName = originalResource.getFilename();
 		String fragment = originalResource.getURI().getFragment();
-		return !StringUtils.hasText(fragment) ? fileName : fileName + "_" + fragment;
+		return StringUtils.hasText(fragment) ? fileName + "_" + fragment : fileName;
 	}
 
 	public void deleteCacheFolder() {

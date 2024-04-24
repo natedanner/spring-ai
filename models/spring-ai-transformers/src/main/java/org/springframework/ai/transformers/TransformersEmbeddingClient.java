@@ -61,15 +61,15 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 	private static final Log logger = LogFactory.getLog(TransformersEmbeddingClient.class);
 
 	// ONNX tokenizer for the all-MiniLM-L6-v2 generative
-	public final static String DEFAULT_ONNX_TOKENIZER_URI = "https://raw.githubusercontent.com/spring-projects/spring-ai/main/models/spring-ai-transformers/src/main/resources/onnx/all-MiniLM-L6-v2/tokenizer.json";
+	public static final String DEFAULT_ONNX_TOKENIZER_URI = "https://raw.githubusercontent.com/spring-projects/spring-ai/main/models/spring-ai-transformers/src/main/resources/onnx/all-MiniLM-L6-v2/tokenizer.json";
 
 	// ONNX generative for all-MiniLM-L6-v2 pre-trained transformer:
 	// https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
-	public final static String DEFAULT_ONNX_MODEL_URI = "https://github.com/spring-projects/spring-ai/raw/main/models/spring-ai-transformers/src/main/resources/onnx/all-MiniLM-L6-v2/model.onnx";
+	public static final String DEFAULT_ONNX_MODEL_URI = "https://github.com/spring-projects/spring-ai/raw/main/models/spring-ai-transformers/src/main/resources/onnx/all-MiniLM-L6-v2/model.onnx";
 
-	public final static String DEFAULT_MODEL_OUTPUT_NAME = "last_hidden_state";
+	public static final String DEFAULT_MODEL_OUTPUT_NAME = "last_hidden_state";
 
-	private final static int EMBEDDING_AXIS = 1;
+	private static final int EMBEDDING_AXIS = 1;
 
 	private Resource tokenizerResource = toResource(DEFAULT_ONNX_TOKENIZER_URI);
 
@@ -110,7 +110,7 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 	/**
 	 * Allow disabling the resource caching.
 	 */
-	private boolean disableCaching = false;
+	private boolean disableCaching;
 
 	/**
 	 * Cache service for caching large {@link Resource} contents, such as the
@@ -232,7 +232,7 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 		return this.call(new EmbeddingRequest(texts, EmbeddingOptions.EMPTY))
 			.getResults()
 			.stream()
-			.map(e -> e.getOutput())
+			.map(Embedding::getOutput)
 			.toList();
 	}
 
@@ -245,19 +245,19 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 
 			Encoding[] encodings = this.tokenizer.batchEncode(request.getInstructions());
 
-			long[][] input_ids0 = new long[encodings.length][];
-			long[][] attention_mask0 = new long[encodings.length][];
-			long[][] token_type_ids0 = new long[encodings.length][];
+			long[][] inputIds0 = new long[encodings.length][];
+			long[][] attentionMask0 = new long[encodings.length][];
+			long[][] tokenTypeIds0 = new long[encodings.length][];
 
 			for (int i = 0; i < encodings.length; i++) {
-				input_ids0[i] = encodings[i].getIds();
-				attention_mask0[i] = encodings[i].getAttentionMask();
-				token_type_ids0[i] = encodings[i].getTypeIds();
+				inputIds0[i] = encodings[i].getIds();
+				attentionMask0[i] = encodings[i].getAttentionMask();
+				tokenTypeIds0[i] = encodings[i].getTypeIds();
 			}
 
-			OnnxTensor inputIds = OnnxTensor.createTensor(this.environment, input_ids0);
-			OnnxTensor attentionMask = OnnxTensor.createTensor(this.environment, attention_mask0);
-			OnnxTensor tokenTypeIds = OnnxTensor.createTensor(this.environment, token_type_ids0);
+			OnnxTensor inputIds = OnnxTensor.createTensor(this.environment, inputIds0);
+			OnnxTensor attentionMask = OnnxTensor.createTensor(this.environment, attentionMask0);
+			OnnxTensor tokenTypeIds = OnnxTensor.createTensor(this.environment, tokenTypeIds0);
 
 			Map<String, OnnxTensor> modelInputs = Map.of("input_ids", inputIds, "attention_mask", attentionMask,
 					"token_type_ids", tokenTypeIds);
@@ -279,7 +279,7 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 
 				try (NDManager manager = NDManager.newBaseManager()) {
 					NDArray ndTokenEmbeddings = create(tokenEmbeddings, manager);
-					NDArray ndAttentionMask = manager.create(attention_mask0);
+					NDArray ndAttentionMask = manager.create(attentionMask0);
 
 					NDArray embedding = meanPooling(ndTokenEmbeddings, ndAttentionMask);
 
@@ -303,7 +303,7 @@ public class TransformersEmbeddingClient extends AbstractEmbeddingClient impleme
 		return modelInputs.entrySet()
 			.stream()
 			.filter(a -> onnxModelInputs.contains(a.getKey()))
-			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
 	}
 

@@ -172,11 +172,11 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 		this.session.execute(SchemaBuilder.dropKeyspace(this.schema.keyspace).ifExists().build());
 	}
 
-	public static class Builder {
+	public static final class Builder {
 
-		private CqlSession session = null;
+		private CqlSession session;
 
-		private CqlSessionBuilder sessionBuilder = null;
+		private CqlSessionBuilder sessionBuilder;
 
 		private String keyspace = DEFAULT_KEYSPACE_NAME;
 
@@ -194,7 +194,7 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 
 		private Set<SchemaColumn> metadataColumns = new HashSet<>();
 
-		private boolean disallowSchemaCreation = false;
+		private boolean disallowSchemaCreation;
 
 		private int fixedThreadPoolExecutorSize = DEFAULT_ADD_CONCURRENCY;
 
@@ -289,7 +289,7 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 		public Builder addMetadataColumn(SchemaColumn column) {
 
 			Preconditions.checkArgument(
-					this.metadataColumns.stream().noneMatch((sc) -> sc.name().equals(column.name())),
+					this.metadataColumns.stream().noneMatch(sc -> sc.name().equals(column.name())),
 					"A metadata column with name %s has already been added", column.name());
 
 			this.metadataColumns.add(column);
@@ -327,11 +327,11 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 			for (SchemaColumn metadata : this.metadataColumns) {
 
 				Preconditions.checkArgument(
-						!this.partitionKeys.stream().anyMatch((c) -> c.name().equals(metadata.name())),
+						!this.partitionKeys.stream().anyMatch(c -> c.name().equals(metadata.name())),
 						"metadataColumn %s cannot have same name as a partition key", metadata.name());
 
 				Preconditions.checkArgument(
-						!this.clusteringKeys.stream().anyMatch((c) -> c.name().equals(metadata.name())),
+						!this.clusteringKeys.stream().anyMatch(c -> c.name().equals(metadata.name())),
 						"metadataColumn %s cannot have same name as a clustering key", metadata.name());
 
 				Preconditions.checkArgument(!metadata.name().equals(this.contentColumnName),
@@ -420,7 +420,7 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 
 			if (m.indexed()) {
 				Preconditions.checkState(
-						tableMetadata.getIndexes().values().stream().anyMatch((i) -> i.getTarget().equals(m.name())),
+						tableMetadata.getIndexes().values().stream().anyMatch(i -> i.getTarget().equals(m.name())),
 						"index %s does not exist", m.name());
 			}
 		}
@@ -442,8 +442,8 @@ public final class CassandraVectorStoreConfig implements AutoCloseable {
 		Stream
 			.concat(this.schema.partitionKeys.stream(),
 					Stream.concat(this.schema.clusteringKeys.stream(), this.schema.metadataColumns.stream()))
-			.filter((cs) -> cs.indexed())
-			.forEach((metadata) -> {
+			.filter(CassandraVectorStoreConfig.SchemaColumn::indexed)
+			.forEach(metadata -> {
 
 				SimpleStatement indexStmt = SchemaBuilder.createIndex(String.format("%s_idx", metadata.name()))
 					.ifNotExists()

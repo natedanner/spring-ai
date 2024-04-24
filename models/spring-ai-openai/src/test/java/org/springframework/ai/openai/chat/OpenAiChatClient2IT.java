@@ -78,11 +78,11 @@ public class OpenAiChatClient2IT {
 		assertThat(isValidJson(content)).isTrue();
 	}
 
-	private static ObjectMapper MAPPER = new ObjectMapper().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
+	private static ObjectMapper mapper = new ObjectMapper().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
 
 	public static boolean isValidJson(String json) {
 		try {
-			MAPPER.readTree(json);
+			mapper.readTree(json);
 		}
 		catch (JacksonException e) {
 			return false;

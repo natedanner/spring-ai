@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @author Anush Shetty
  * @since 0.8.1
  */
-class QdrantValueFactory {
+final class QdrantValueFactory {
 
 	private QdrantValueFactory() {
 	}
@@ -41,7 +41,7 @@ class QdrantValueFactory {
 	public static Map<String, Value> toValueMap(Map<String, Object> inputMap) {
 		Assert.notNull(inputMap, "Input map must not be null");
 
-		return inputMap.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> value(e.getValue())));
+		return inputMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> value(e.getValue())));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -81,7 +81,7 @@ class QdrantValueFactory {
 	}
 
 	private static Value value(Object[] elements) {
-		List<Value> values = new ArrayList<Value>(elements.length);
+		List<Value> values = new ArrayList<>(elements.length);
 
 		for (Object element : elements) {
 			values.add(value(element));

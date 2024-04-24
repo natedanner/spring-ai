@@ -46,9 +46,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(OpenAiSpeechClientWithSpeechResponseMetadataTests.Config.class)
 public class OpenAiSpeechClientWithSpeechResponseMetadataTests {
 
-	private static String TEST_API_KEY = "sk-1234567890";
+	private static String testApiKey = "sk-1234567890";
 
-	private static final Float SPEED = 1.0f;
+	private static final Float SPEED = 1.0F;
 
 	@Autowired
 	private OpenAiAudioSpeechClient openAiSpeechClient;
@@ -110,7 +110,7 @@ public class OpenAiSpeechClientWithSpeechResponseMetadataTests {
 
 		server.expect(requestTo("/v1/audio/speech"))
 			.andExpect(method(HttpMethod.POST))
-			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + TEST_API_KEY))
+			.andExpect(header(HttpHeaders.AUTHORIZATION, "Bearer " + testApiKey))
 			.andRespond(withSuccess("Audio bytes as string", MediaType.APPLICATION_OCTET_STREAM).headers(httpHeaders));
 
 	}
@@ -125,7 +125,7 @@ public class OpenAiSpeechClientWithSpeechResponseMetadataTests {
 
 		@Bean
 		public OpenAiAudioApi openAiAudioApi(RestClient.Builder builder) {
-			return new OpenAiAudioApi("", TEST_API_KEY, builder, RetryUtils.DEFAULT_RESPONSE_ERROR_HANDLER);
+			return new OpenAiAudioApi("", testApiKey, builder, RetryUtils.DEFAULT_RESPONSE_ERROR_HANDLER);
 		}
 
 	}

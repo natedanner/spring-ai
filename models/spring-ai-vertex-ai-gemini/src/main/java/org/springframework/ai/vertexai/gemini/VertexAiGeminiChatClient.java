@@ -69,7 +69,7 @@ public class VertexAiGeminiChatClient
 		extends AbstractFunctionCallSupport<Content, VertexAiGeminiChatClient.GeminiRequest, GenerateContentResponse>
 		implements ChatClient, StreamingChatClient, DisposableBean {
 
-	private final static boolean IS_RUNTIME_CALL = true;
+	private static final boolean IS_RUNTIME_CALL = true;
 
 	private final VertexAI vertexAI;
 
@@ -152,7 +152,7 @@ public class VertexAiGeminiChatClient
 			.map(candidate -> candidate.getContent().getPartsList())
 			.flatMap(List::stream)
 			.map(Part::getText)
-			.map(t -> new Generation(t.toString()))
+			.map(t -> new Generation(t))
 			.toList();
 
 		return new ChatResponse(generations, toChatResponseMetadata(response));
@@ -174,7 +174,7 @@ public class VertexAiGeminiChatClient
 					.map(candidate -> candidate.getContent().getPartsList())
 					.flatMap(List::stream)
 					.map(Part::getText)
-					.map(t -> new Generation(t.toString()))
+					.map(t -> new Generation(t))
 					.toList();
 
 				return new ChatResponse(generations, toChatResponseMetadata(response));
@@ -286,10 +286,10 @@ public class VertexAiGeminiChatClient
 		String systemContext = prompt.getInstructions()
 			.stream()
 			.filter(m -> m.getMessageType() == MessageType.SYSTEM)
-			.map(m -> m.getContent())
+			.map(Message::getContent)
 			.collect(Collectors.joining(System.lineSeparator()));
 
-		List<Content> contents = prompt.getInstructions()
+		return prompt.getInstructions()
 			.stream()
 			.filter(m -> m.getMessageType() == MessageType.USER || m.getMessageType() == MessageType.ASSISTANT)
 			.map(message -> Content.newBuilder()
@@ -297,8 +297,6 @@ public class VertexAiGeminiChatClient
 				.addAllParts(messageToGeminiParts(message, systemContext))
 				.build())
 			.toList();
-
-		return contents;
 	}
 
 	private static GeminiMessageType toGeminiMessageType(@NonNull MessageType type) {
@@ -319,7 +317,7 @@ public class VertexAiGeminiChatClient
 
 		if (message instanceof UserMessage userMessage) {
 
-			String messageTextContent = (userMessage.getContent() == null) ? "null" : userMessage.getContent();
+			String messageTextContent = userMessage.getContent() == null ? "null" : userMessage.getContent();
 			if (StringUtils.hasText(systemContext)) {
 				messageTextContent = systemContext + "\n\n" + messageTextContent;
 			}

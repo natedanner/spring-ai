@@ -315,7 +315,7 @@ public class WatsonxAiChatOptions implements ChatOptions {
      */
     public static Map<String, Object> filterNonSupportedFields(Map<String, Object> options) {
         return options.entrySet().stream()
-                .filter(e -> !e.getKey().equals("model"))
+                .filter(e -> !"model".equals(e.getKey()))
                 .filter(e -> e.getValue() != null)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }

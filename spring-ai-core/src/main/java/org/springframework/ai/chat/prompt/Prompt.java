@@ -80,10 +80,12 @@ public class Prompt implements ModelRequest<List<Message>> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Prompt prompt))
+		}
+		if (!(o instanceof Prompt prompt)) {
 			return false;
+		}
 		return Objects.equals(this.messages, prompt.messages) && Objects.equals(this.modelOptions, prompt.modelOptions);
 	}
 

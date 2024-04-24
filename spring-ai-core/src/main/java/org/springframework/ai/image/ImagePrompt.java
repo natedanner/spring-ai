@@ -65,10 +65,12 @@ public class ImagePrompt implements ModelRequest<List<ImageMessage>> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ImagePrompt that))
+		}
+		if (!(o instanceof ImagePrompt that)) {
 			return false;
+		}
 		return Objects.equals(messages, that.messages) && Objects.equals(imageModelOptions, that.imageModelOptions);
 	}
 

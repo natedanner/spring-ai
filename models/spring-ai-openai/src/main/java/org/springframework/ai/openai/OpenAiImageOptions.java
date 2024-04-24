@@ -100,7 +100,7 @@ public class OpenAiImageOptions implements ImageOptions {
 		return new Builder();
 	}
 
-	public static class Builder {
+	public static final class Builder {
 
 		private final OpenAiImageOptions options;
 
@@ -234,15 +234,17 @@ public class OpenAiImageOptions implements ImageOptions {
 		if (this.size != null) {
 			return this.size;
 		}
-		return (this.width != null && this.height != null) ? this.width + "x" + this.height : null;
+		return this.width != null && this.height != null ? this.width + "x" + this.height : null;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof OpenAiImageOptions that))
+		}
+		if (!(o instanceof OpenAiImageOptions that)) {
 			return false;
+		}
 		return Objects.equals(n, that.n) && Objects.equals(model, that.model) && Objects.equals(width, that.width)
 				&& Objects.equals(height, that.height) && Objects.equals(quality, that.quality)
 				&& Objects.equals(responseFormat, that.responseFormat) && Objects.equals(size, that.size)

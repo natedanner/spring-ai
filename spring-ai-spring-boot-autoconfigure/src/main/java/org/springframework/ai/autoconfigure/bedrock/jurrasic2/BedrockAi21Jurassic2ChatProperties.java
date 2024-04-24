@@ -35,7 +35,7 @@ public class BedrockAi21Jurassic2ChatProperties {
 	/**
 	 * Enable Bedrock Ai21Jurassic2 chat client. Disabled by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * The generative id to use. See the {@link Ai21Jurassic2ChatModel} for the supported

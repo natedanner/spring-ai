@@ -36,7 +36,7 @@ public class BedrockCohereEmbeddingProperties {
 	/**
 	 * Enable Bedrock Cohere Embedding Client. False by default.
 	 */
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * Bedrock Cohere Embedding generative name. Defaults to

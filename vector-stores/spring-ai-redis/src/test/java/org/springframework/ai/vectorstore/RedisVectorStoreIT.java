@@ -77,12 +77,11 @@ class RedisVectorStoreIT {
 
 	@Test
 	void ensureIndexGetsCreated() {
-		this.contextRunner.run(context -> {
+		this.contextRunner.run(context ->
 			assertThat(context.getBean(RedisVectorStore.class)
 				.getJedis()
 				.ftList()
-				.contains(RedisVectorStore.DEFAULT_INDEX_NAME));
-		});
+				.contains(RedisVectorStore.DEFAULT_INDEX_NAME)));
 	}
 
 	@Test
@@ -105,7 +104,7 @@ class RedisVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("meta1", RedisVectorStore.DISTANCE_FIELD_NAME);
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			results = vectorStore.similaritySearch(SearchRequest.query("Spring").withTopK(1));
 			assertThat(results).isEmpty();

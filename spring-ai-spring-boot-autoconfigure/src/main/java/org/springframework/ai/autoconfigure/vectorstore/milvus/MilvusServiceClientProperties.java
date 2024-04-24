@@ -78,7 +78,7 @@ public class MilvusServiceClientProperties {
 	 * network fluctuations. The deadline value must be larger than or equal to zero.
 	 * Default value is 0, deadline is disabled.
 	 */
-	private long rpcDeadlineMs = 0; // Disabling deadline
+	private long rpcDeadlineMs; // Disabling deadline
 
 	/**
 	 * The client.key path for tls two-way authentication, only takes effect when "secure"
@@ -113,7 +113,7 @@ public class MilvusServiceClientProperties {
 	/**
 	 * Secure the authorization for this connection, set to True to enable TLS.
 	 */
-	protected boolean secure = false;
+	protected boolean secure;
 
 	/**
 	 * Idle timeout value of client channel. The timeout value must be larger than zero.

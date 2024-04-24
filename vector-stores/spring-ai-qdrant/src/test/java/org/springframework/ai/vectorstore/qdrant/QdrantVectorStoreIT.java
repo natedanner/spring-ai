@@ -104,7 +104,7 @@ public class QdrantVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKeys("meta2", "distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 
 			List<Document> results2 = vectorStore.similaritySearch(SearchRequest.query("Great").withTopK(1));
 			assertThat(results2).hasSize(0);
@@ -156,7 +156,7 @@ public class QdrantVectorStoreIT {
 			assertThat(results.get(0).getId()).isEqualTo(nlDocument.getId());
 
 			// Remove all documents from the store
-			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(List.of(bgDocument, nlDocument).stream().map(Document::getId).toList());
 		});
 	}
 
@@ -229,7 +229,7 @@ public class QdrantVectorStoreIT {
 			assertThat(resultDoc.getMetadata()).containsKey("distance");
 
 			// Remove all documents from the store
-			vectorStore.delete(documents.stream().map(doc -> doc.getId()).toList());
+			vectorStore.delete(documents.stream().map(Document::getId).toList());
 		});
 	}
 
@@ -240,8 +240,7 @@ public class QdrantVectorStoreIT {
 		public QdrantClient qdrantClient() {
 			String host = qdrantContainer.getHost();
 			int port = qdrantContainer.getMappedPort(QDRANT_GRPC_PORT);
-			QdrantClient qdrantClient = new QdrantClient(QdrantGrpcClient.newBuilder(host, port, false).build());
-			return qdrantClient;
+			return new QdrantClient(QdrantGrpcClient.newBuilder(host, port, false).build());
 		}
 
 		@Bean

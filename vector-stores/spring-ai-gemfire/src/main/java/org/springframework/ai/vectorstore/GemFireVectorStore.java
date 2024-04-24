@@ -220,7 +220,7 @@ public class GemFireVectorStore implements VectorStore {
 		private String[] fields = new String[] { "vector" };
 
 		@JsonProperty("buckets")
-		private int buckets = 0;
+		private int buckets;
 
 		public CreateRequest() {
 		}

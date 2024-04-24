@@ -47,7 +47,7 @@ public class BedrockAwsConnectionConfigurationIT {
 					"spring.ai.bedrock.aws.secret-key=" + System.getenv("AWS_SECRET_ACCESS_KEY"),
 					"spring.ai.bedrock.aws.region=" + Region.US_EAST_1.id())
 			.withConfiguration(AutoConfigurations.of(TestAutoConfiguration.class))
-			.run((context) -> {
+			.run(context -> {
 				var awsCredentialsProvider = context.getBean(AwsCredentialsProvider.class);
 				var awsRegionProvider = context.getBean(AwsRegionProvider.class);
 
@@ -71,7 +71,7 @@ public class BedrockAwsConnectionConfigurationIT {
 					"spring.ai.bedrock.aws.region=" + Region.US_EAST_1.id())
 			.withConfiguration(AutoConfigurations.of(TestAutoConfiguration.class,
 					CustomAwsCredentialsProviderAndAwsRegionProviderAutoConfiguration.class))
-			.run((context) -> {
+			.run(context -> {
 				var awsCredentialsProvider = context.getBean(AwsCredentialsProvider.class);
 				var awsRegionProvider = context.getBean(AwsRegionProvider.class);
 

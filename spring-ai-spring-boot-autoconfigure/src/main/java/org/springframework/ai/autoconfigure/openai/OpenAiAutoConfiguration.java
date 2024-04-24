@@ -138,10 +138,8 @@ public class OpenAiAutoConfiguration {
 
 		var openAiAudioApi = new OpenAiAudioApi(baseUrl, apiKey, RestClient.builder(), responseErrorHandler);
 
-		OpenAiAudioTranscriptionClient openAiChatClient = new OpenAiAudioTranscriptionClient(openAiAudioApi,
+		return new OpenAiAudioTranscriptionClient(openAiAudioApi,
 				transcriptionProperties.getOptions(), retryTemplate);
-
-		return openAiChatClient;
 	}
 
 	@Bean
@@ -160,10 +158,8 @@ public class OpenAiAutoConfiguration {
 
 		var openAiAudioApi = new OpenAiAudioApi(baseUrl, apiKey, RestClient.builder(), responseErrorHandler);
 
-		OpenAiAudioSpeechClient openAiSpeechClient = new OpenAiAudioSpeechClient(openAiAudioApi,
+		return new OpenAiAudioSpeechClient(openAiAudioApi,
 				speechProperties.getOptions());
-
-		return openAiSpeechClient;
 	}
 
 	@Bean

@@ -34,7 +34,7 @@ public class PgVectorStoreProperties {
 
 	private PgDistanceType distanceType = PgDistanceType.COSINE_DISTANCE;
 
-	private boolean removeExistingVectorStoreTable = false;
+	private boolean removeExistingVectorStoreTable;
 
 	public int getDimensions() {
 		return dimensions;

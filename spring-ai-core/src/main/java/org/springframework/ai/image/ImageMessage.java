@@ -47,10 +47,12 @@ public class ImageMessage {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof ImageMessage that))
+		}
+		if (!(o instanceof ImageMessage that)) {
 			return false;
+		}
 		return Objects.equals(text, that.text) && Objects.equals(weight, that.weight);
 	}
 

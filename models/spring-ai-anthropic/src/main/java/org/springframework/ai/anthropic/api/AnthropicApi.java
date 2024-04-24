@@ -219,7 +219,7 @@ public class AnthropicApi {
 		}
 	}
 
-	public static class ChatCompletionRequestBuilder {
+	public static final class ChatCompletionRequestBuilder {
 
 		private String model;
 
@@ -433,7 +433,7 @@ public class AnthropicApi {
 			 * Image message.
 			 */
 			@JsonProperty("image")
-			IMAGE;
+			IMAGE
 
 		}
 

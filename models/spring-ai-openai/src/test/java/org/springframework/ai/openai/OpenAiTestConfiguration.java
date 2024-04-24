@@ -52,27 +52,23 @@ public class OpenAiTestConfiguration {
 
 	@Bean
 	public OpenAiChatClient openAiChatClient(OpenAiApi api) {
-		OpenAiChatClient openAiChatClient = new OpenAiChatClient(api);
-		return openAiChatClient;
+		return new OpenAiChatClient(api);
 	}
 
 	@Bean
 	public OpenAiAudioTranscriptionClient openAiTranscriptionClient(OpenAiAudioApi api) {
-		OpenAiAudioTranscriptionClient openAiTranscriptionClient = new OpenAiAudioTranscriptionClient(api);
-		return openAiTranscriptionClient;
+		return new OpenAiAudioTranscriptionClient(api);
 	}
 
 	@Bean
 	public OpenAiAudioSpeechClient openAiAudioSpeechClient(OpenAiAudioApi api) {
-		OpenAiAudioSpeechClient openAiAudioSpeechClient = new OpenAiAudioSpeechClient(api);
-		return openAiAudioSpeechClient;
+		return new OpenAiAudioSpeechClient(api);
 	}
 
 	@Bean
 	public OpenAiImageClient openAiImageClient(OpenAiImageApi imageApi) {
-		OpenAiImageClient openAiImageClient = new OpenAiImageClient(imageApi);
 		// openAiImageClient.setModel("foobar");
-		return openAiImageClient;
+		return new OpenAiImageClient(imageApi);
 	}
 
 	@Bean

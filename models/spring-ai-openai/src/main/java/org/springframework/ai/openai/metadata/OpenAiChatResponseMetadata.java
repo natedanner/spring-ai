@@ -36,8 +36,7 @@ public class OpenAiChatResponseMetadata implements ChatResponseMetadata {
 	public static OpenAiChatResponseMetadata from(OpenAiApi.ChatCompletion result) {
 		Assert.notNull(result, "OpenAI ChatCompletionResult must not be null");
 		OpenAiUsage usage = OpenAiUsage.from(result.usage());
-		OpenAiChatResponseMetadata chatResponseMetadata = new OpenAiChatResponseMetadata(result.id(), usage);
-		return chatResponseMetadata;
+		return new OpenAiChatResponseMetadata(result.id(), usage);
 	}
 
 	private final String id;

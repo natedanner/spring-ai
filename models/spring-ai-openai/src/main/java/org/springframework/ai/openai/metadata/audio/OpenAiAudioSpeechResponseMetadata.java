@@ -38,14 +38,12 @@ public class OpenAiAudioSpeechResponseMetadata implements ResponseMetadata {
 
 	public static OpenAiAudioSpeechResponseMetadata from(OpenAiAudioApi.StructuredResponse result) {
 		Assert.notNull(result, "OpenAI speech must not be null");
-		OpenAiAudioSpeechResponseMetadata speechResponseMetadata = new OpenAiAudioSpeechResponseMetadata();
-		return speechResponseMetadata;
+		return new OpenAiAudioSpeechResponseMetadata();
 	}
 
 	public static OpenAiAudioSpeechResponseMetadata from(String result) {
 		Assert.notNull(result, "OpenAI speech must not be null");
-		OpenAiAudioSpeechResponseMetadata speechResponseMetadata = new OpenAiAudioSpeechResponseMetadata();
-		return speechResponseMetadata;
+		return new OpenAiAudioSpeechResponseMetadata();
 	}
 
 	@Nullable

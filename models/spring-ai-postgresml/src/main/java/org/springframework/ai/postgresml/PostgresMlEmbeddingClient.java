@@ -214,7 +214,7 @@ public class PostgresMlEmbeddingClient extends AbstractEmbeddingClient implement
 	 */
 	PostgresMlEmbeddingOptions mergeOptions(EmbeddingOptions requestOptions) {
 
-		PostgresMlEmbeddingOptions options = (this.defaultOptions != null) ? this.defaultOptions
+		PostgresMlEmbeddingOptions options = this.defaultOptions != null ? this.defaultOptions
 				: PostgresMlEmbeddingOptions.builder().build();
 
 		if (requestOptions != null && !EmbeddingOptions.EMPTY.equals(requestOptions)) {
